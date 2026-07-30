@@ -7,11 +7,18 @@ interface NavbarProps {
   onOpenSearch: () => void;
 }
 
+interface NavItem {
+  id: string;
+  label: string;
+  icon: React.ElementType;
+  badge?: string;
+}
+
 export const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab, onOpenSearch }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-  const mainNavItems = [
+  const mainNavItems: NavItem[] = [
     { id: 'hero', label: 'Home', icon: Compass },
     { id: 'about', label: 'About', icon: Info },
     { id: 'map', label: 'Interactive Map', icon: Map },
@@ -23,7 +30,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab, onOpenS
     { id: 'chatbot', label: 'AI Botanist', icon: MessageSquare, badge: 'RAG' },
   ];
 
-  const secondaryNavItems = [
+  const secondaryNavItems: NavItem[] = [
     { id: 'gallery', label: 'Gallery', icon: Image },
     { id: 'conservation', label: 'Conservation', icon: ShieldAlert },
     { id: 'tools', label: 'Compare & Calendar', icon: SlidersHorizontal },
@@ -32,7 +39,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab, onOpenS
     { id: 'admin', label: 'Admin Portal', icon: Settings },
   ];
 
-  const allNavItems = [...mainNavItems, ...secondaryNavItems];
+  const allNavItems: NavItem[] = [...mainNavItems, ...secondaryNavItems];
 
   return (
     <header className="sticky top-0 z-50 bg-amber-950/95 backdrop-blur-md border-b border-amber-800/40 text-amber-50 shadow-xl">
