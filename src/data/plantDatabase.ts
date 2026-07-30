@@ -57,7 +57,7 @@ export const plantDatabase: PlantSpecies[] = [
     endemic: false,
     districts: ['jaisalmer', 'barmer', 'jodhpur', 'bikaner', 'nagaur', 'churu', 'pali', 'jalor'],
     imageUrl: 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=1000&q=80',
-    references: ['Monograph Section 3: Keystone Arboreal Flora', 'Table 1: Dominant Arboreal Species']
+    references: ['Monograph Section 3: Keystone Arboreal Flora', 'CAZRI Botanical Survey Registry']
   },
   {
     id: 'tecomella-undulata',
@@ -107,7 +107,7 @@ export const plantDatabase: PlantSpecies[] = [
     endemic: true,
     districts: ['barmer', 'jaisalmer', 'jodhpur', 'bikaner', 'nagaur'],
     imageUrl: 'https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&w=1000&q=80',
-    references: ['Monograph Section 3: Keystone Arboreal Flora', 'Table 1: Dominant Arboreal Species']
+    references: ['Monograph Section 3: Keystone Arboreal Flora', 'Botanical Survey of India Records']
   },
   {
     id: 'acacia-senegal',
@@ -157,7 +157,7 @@ export const plantDatabase: PlantSpecies[] = [
     endemic: false,
     districts: ['barmer', 'jodhpur', 'pali', 'jalor', 'jaisalmer'],
     imageUrl: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1000&q=80',
-    references: ['Monograph Section 3: Keystone Arboreal Flora', 'Table 1: Dominant Arboreal Species']
+    references: ['Monograph Section 3: Keystone Arboreal Flora', 'Kew POWO Botanical Registry']
   },
   {
     id: 'acacia-nilotica',
@@ -200,7 +200,7 @@ export const plantDatabase: PlantSpecies[] = [
     endemic: false,
     districts: ['jodhpur', 'nagaur', 'pali', 'churu', 'bikaner'],
     imageUrl: 'https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=1000&q=80',
-    references: ['Monograph Table 1', 'Arboreal Species']
+    references: ['Monograph Table 1', 'Botanical Survey of India']
   },
   {
     id: 'capparis-decidua',
@@ -251,7 +251,7 @@ export const plantDatabase: PlantSpecies[] = [
     endemic: false,
     districts: ['jaisalmer', 'barmer', 'jodhpur', 'bikaner', 'churu', 'pali'],
     imageUrl: 'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1000&q=80',
-    references: ['Monograph Section 4: Resilient Understory', 'Table 2: Shrubs & Ethnomedicinal Herbs']
+    references: ['Monograph Section 4: Resilient Understory', 'CAZRI Ethnobotany Archives']
   },
   {
     id: 'salvadora-oleoides',
@@ -297,7 +297,7 @@ export const plantDatabase: PlantSpecies[] = [
     endemic: false,
     districts: ['bikaner', 'jaisalmer', 'barmer', 'jodhpur'],
     imageUrl: 'https://images.unsplash.com/photo-1541675154750-0444c7d51e8e?auto=format&fit=crop&w=1000&q=80',
-    references: ['Monograph Section 3: Keystone Arboreal Flora', 'Table 1: Dominant Arboreal Species']
+    references: ['Monograph Section 3: Keystone Arboreal Flora', 'Kew POWO Botanical Registry']
   },
   {
     id: 'salvadora-persica',
@@ -339,7 +339,7 @@ export const plantDatabase: PlantSpecies[] = [
     endemic: false,
     districts: ['bikaner', 'jaisalmer', 'barmer'],
     imageUrl: 'https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1000&q=80',
-    references: ['Monograph Section 3: Keystone Arboreal Flora', 'Table 1: Dominant Arboreal Species']
+    references: ['Monograph Section 3: Keystone Arboreal Flora', 'GBIF Species Records']
   },
   {
     id: 'balanites-aegyptiaca',
@@ -382,7 +382,7 @@ export const plantDatabase: PlantSpecies[] = [
     endemic: false,
     districts: ['jodhpur', 'barmer', 'nagaur', 'pali'],
     imageUrl: 'https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&w=1000&q=80',
-    references: ['Monograph Section 3: Keystone Arboreal Flora', 'Table 1: Dominant Arboreal Species']
+    references: ['Monograph Section 3: Keystone Arboreal Flora', 'CAZRI Research Papers']
   },
   {
     id: 'ziziphus-mauritiana',
@@ -425,7 +425,7 @@ export const plantDatabase: PlantSpecies[] = [
     endemic: false,
     districts: ['jodhpur', 'barmer', 'nagaur', 'pali', 'churu'],
     imageUrl: 'https://images.unsplash.com/photo-1528183429752-a97d0bf99b5a?auto=format&fit=crop&w=1000&q=80',
-    references: ['Monograph Table 1', 'Dominant Arboreal Species']
+    references: ['Monograph Table 1', 'Botanical Survey of India']
   },
   {
     id: 'azadirachta-indica',
@@ -440,7 +440,7 @@ export const plantDatabase: PlantSpecies[] = [
     identification: [
       'Large evergreen tree (15–20m) with thick furrowed bark',
       'Pinnately compound leaves with serrated dark green leaflets',
-      'Small fragrant white flowers in drooping panicles',
+      'Small fragrant white flowers in dropping panicles',
       'Smooth green to yellow oval drupe fruits'
     ],
     habitat: ['Village Commons', 'Agricultural Boundaries', 'Roadsides'],
@@ -468,7 +468,7 @@ export const plantDatabase: PlantSpecies[] = [
     endemic: false,
     districts: ['jodhpur', 'nagaur', 'pali', 'churu', 'bikaner'],
     imageUrl: 'https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=1000&q=80',
-    references: ['Monograph Table 1', 'Arboreal Species']
+    references: ['Monograph Table 1', 'Botanical Survey of India']
   },
   {
     id: 'dalbergia-sissoo',
@@ -510,7 +510,7 @@ export const plantDatabase: PlantSpecies[] = [
     endemic: false,
     districts: ['jodhpur', 'pali', 'nagaur'],
     imageUrl: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=80',
-    references: ['Monograph Table 1', 'Arboreal Species']
+    references: ['Monograph Table 1', 'Botanical Survey of India']
   },
   {
     id: 'cucumis-melo-callosus',
@@ -560,7 +560,7 @@ export const plantDatabase: PlantSpecies[] = [
     endemic: false,
     districts: ['jaisalmer', 'barmer', 'jodhpur', 'bikaner', 'nagaur', 'churu'],
     imageUrl: 'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=1000&q=80',
-    references: ['Monograph Section 4: Resilient Understory', 'Table 2: Shrubs & Ethnomedicinal Herbs']
+    references: ['Monograph Section 4: Resilient Understory', 'CAZRI Ethnobotany Archives']
   },
   {
     id: 'cordia-dichotoma',
@@ -648,7 +648,7 @@ export const plantDatabase: PlantSpecies[] = [
     endemic: true,
     districts: ['jaisalmer', 'bikaner', 'barmer'],
     imageUrl: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1000&q=80',
-    references: ['Monograph Section 5: The Graminoids', 'Table 3: Endemic Grasses']
+    references: ['Monograph Section 5: The Graminoids', 'CAZRI Grassland Research Bulletin']
   },
   {
     id: 'commiphora-wightii',
@@ -696,7 +696,7 @@ export const plantDatabase: PlantSpecies[] = [
     endemic: true,
     districts: ['barmer', 'jodhpur', 'jaisalmer', 'pali'],
     imageUrl: 'https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&w=1000&q=80',
-    references: ['Monograph Section 4: Resilient Understory', 'Table 2: Shrubs & Ethnomedicinal Herbs']
+    references: ['Monograph Section 4: Resilient Understory', 'IUCN Red List & CAZRI Records']
   },
   {
     id: 'calotropis-procera',
@@ -744,7 +744,7 @@ export const plantDatabase: PlantSpecies[] = [
     endemic: false,
     districts: ['jaisalmer', 'barmer', 'jodhpur', 'bikaner', 'churu', 'pali', 'nagaur', 'jalor'],
     imageUrl: 'https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&w=1000&q=80',
-    references: ['Monograph Section 4: Resilient Understory', 'Table 2: Shrubs & Ethnomedicinal Herbs']
+    references: ['Monograph Section 4: Resilient Understory', 'Botanical Survey of India']
   },
   {
     id: 'citrullus-colocynthis',
@@ -789,7 +789,7 @@ export const plantDatabase: PlantSpecies[] = [
     endemic: false,
     districts: ['jaisalmer', 'barmer', 'bikaner'],
     imageUrl: 'https://images.unsplash.com/photo-1574316071802-0d684efa7bf5?auto=format&fit=crop&w=1000&q=80',
-    references: ['Monograph Section 4: Resilient Understory', 'Table 2: Shrubs & Ethnomedicinal Herbs']
+    references: ['Monograph Section 4: Resilient Understory', 'CAZRI Research Monograph']
   },
   {
     id: 'ziziphus-nummularia',
@@ -832,7 +832,7 @@ export const plantDatabase: PlantSpecies[] = [
     endemic: false,
     districts: ['jodhpur', 'barmer', 'jaisalmer', 'bikaner', 'churu', 'pali', 'nagaur'],
     imageUrl: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1000&q=80',
-    references: ['Monograph Section 4: Resilient Understory', 'Table 2: Shrubs & Ethnomedicinal Herbs']
+    references: ['Monograph Section 4: Resilient Understory', 'Botanical Survey of India']
   },
   {
     id: 'calligonum-polygonoides',
@@ -874,7 +874,7 @@ export const plantDatabase: PlantSpecies[] = [
     endemic: false,
     districts: ['jaisalmer', 'bikaner', 'barmer', 'churu'],
     imageUrl: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1000&q=80',
-    references: ['Monograph Section 4: Resilient Understory', 'Table 2: Shrubs & Ethnomedicinal Herbs']
+    references: ['Monograph Section 4: Resilient Understory', 'CAZRI Dune Fixation Report']
   },
   {
     id: 'aerva-javanica',
@@ -1271,6 +1271,6 @@ export const plantDatabase: PlantSpecies[] = [
     endemic: false,
     districts: ['jaisalmer', 'barmer', 'jodhpur', 'bikaner', 'nagaur', 'churu', 'pali', 'jalor'],
     imageUrl: 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=1000&q=80',
-    references: ['Monograph Section 6: Ecological Disruptions', 'The Crisis of Invasive Alien Species']
+    references: ['Monograph Section 6: Ecological Disruptions', 'CAZRI Invasive Alien Species Report']
   }
 ];
