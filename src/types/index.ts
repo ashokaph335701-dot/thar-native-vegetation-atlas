@@ -43,18 +43,21 @@ export interface DistrictData {
   id: string;
   name: string;
   hindiName: string;
+  localName?: string;
   geomorphology: string;
   rainfallRange: string;
-  rainfallMin: number;
-  rainfallMax: number;
+  rainfallMin?: number;
+  rainfallMax?: number;
   temperatureRange: string;
-  soilTypes: string[];
-  characteristicEcosystems: string[];
-  dominantSpecies: string[];
-  keyVegetation: string;
-  protectedAreas: string[];
-  mapCoordinates: { x: number; y: number }; // SVG percentage
-  svgPathD: string;
+  soilTypes?: string[];
+  characteristicEcosystems?: string[];
+  dominantSpecies?: string[];
+  dominantVegetation?: string[];
+  keyVegetation?: string;
+  protectedAreas?: string[];
+  mapCoordinates: { x: number; y: number };
+  svgPathD?: string;
+  color?: string;
 }
 
 export interface HabitatData {
