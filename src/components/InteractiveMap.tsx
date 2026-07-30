@@ -16,13 +16,13 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({ onSelectPlant })
     plant.districts.includes(selectedDistrict.id)
   );
 
-  // SVG Path geometries for Rajasthan districts matching reference political map
+  // SVG Path geometries for Rajasthan districts matching authentic political state outline
   const districtPaths: { [key: string]: { path: string; labelX: number; labelY: number; labelHindi: string; labelEng: string } } = {
     jaisalmer: {
-      // Jaisalmer (Far West - Large light blue shape)
-      path: "M 20,165 L 75,120 L 135,145 L 140,195 L 125,230 L 135,275 L 105,305 L 45,290 L 15,260 Z",
+      // Jaisalmer (Far West - Large light blue polygon)
+      path: "M 15,160 L 70,120 L 135,145 L 140,195 L 125,230 L 135,275 L 105,300 L 45,280 L 15,220 Z",
       labelX: 75,
-      labelY: 200,
+      labelY: 195,
       labelHindi: "जैसलमेर",
       labelEng: "Jaisalmer"
     },
@@ -68,7 +68,7 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({ onSelectPlant })
     },
     barmer: {
       // Barmer (Southwest - Purple shape)
-      path: "M 45,290 L 105,305 L 125,355 L 115,405 L 65,385 L 20,345 Z",
+      path: "M 45,280 L 105,300 L 125,355 L 115,405 L 65,385 L 20,345 Z",
       labelX: 75,
       labelY: 345,
       labelHindi: "बाड़मेर",
@@ -76,7 +76,7 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({ onSelectPlant })
     },
     balotra: {
       // Balotra (Between Barmer, Jodhpur & Jalor)
-      path: "M 105,305 L 135,275 L 165,310 L 160,360 L 125,355 Z",
+      path: "M 105,300 L 135,275 L 165,310 L 160,360 L 125,355 Z",
       labelX: 138,
       labelY: 325,
       labelHindi: "बालोतरा",
@@ -108,13 +108,13 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({ onSelectPlant })
         <div className="text-center max-w-3xl mx-auto space-y-2">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-900/60 border border-amber-600/40 text-amber-300 text-xs font-bold shadow-lg">
             <MapPin className="w-4 h-4 text-amber-400" />
-            <span>Official Rajasthan District Map Reference</span>
+            <span>Authentic Rajasthan Political Map Reference</span>
           </div>
           <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-amber-100">
             Interactive Rajasthan District Vegetation Map
           </h2>
           <p className="text-sm text-amber-300/80 leading-relaxed">
-            Click any district directly on the vector map below to explore native vegetation species, rainfall stats, and photos!
+            Click any district directly on the Rajasthan map to view native trees, shrubs, and grasses with authentic photos!
           </p>
         </div>
 
@@ -127,7 +127,7 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({ onSelectPlant })
             {/* Quick District Selector Ribbon */}
             <div className="flex items-center justify-between pb-3 border-b border-amber-800/30 text-xs flex-wrap gap-2">
               <span className="font-bold text-amber-400 flex items-center gap-1.5">
-                <Info className="w-4 h-4 text-amber-400" /> Click a District Polygon:
+                <Info className="w-4 h-4 text-amber-400" /> Select District:
               </span>
               <div className="flex items-center gap-1 overflow-x-auto scrollbar-none py-1">
                 {districtDatabase.map((dist) => (
@@ -149,7 +149,7 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({ onSelectPlant })
             {/* Rajasthan SVG District Map Container */}
             <div className="relative w-full h-[460px] sm:h-[520px] bg-gradient-to-br from-stone-950 via-stone-900 to-amber-950/80 rounded-2xl border border-amber-800/40 p-2 flex items-center justify-center overflow-hidden">
               
-              <svg viewBox="0 0 340 460" className="w-full h-full filter drop-shadow-2xl">
+              <svg viewBox="0 0 350 460" className="w-full h-full filter drop-shadow-2xl">
                 
                 <defs>
                   {/* Glowing Filter */}
@@ -159,14 +159,14 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({ onSelectPlant })
                   </filter>
                 </defs>
 
-                {/* Outer Rajasthan Border Outline */}
+                {/* Authentic Rajasthan External Boundary Outline matching user's map */}
                 <path
-                  d="M 15,260 L 20,165 L 75,120 L 135,145 L 205,45 L 255,80 L 295,95 L 305,160 L 290,210 L 270,270 L 235,360 L 205,405 L 180,395 L 155,435 L 105,420 L 65,385 L 20,345 Z"
-                  fill="none"
+                  d="M 205,25 L 255,45 L 295,80 L 325,120 L 315,170 L 335,230 L 315,290 L 275,320 L 225,370 L 185,360 L 155,435 L 105,420 L 65,385 L 20,345 L 15,220 L 15,160 L 70,120 L 135,145 Z"
+                  fill="#1c1917"
                   stroke="#fbbf24"
-                  strokeWidth="2"
+                  strokeWidth="2.5"
                   strokeDasharray="4 2"
-                  className="opacity-40"
+                  className="opacity-60"
                 />
 
                 {/* District Polygons */}
@@ -180,12 +180,12 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({ onSelectPlant })
                       {/* Polygon */}
                       <path
                         d={geom.path}
-                        fill={isSelected ? '#f59e0b' : dist.color}
-                        fillOpacity={isSelected ? 0.9 : 0.45}
+                        fill={isSelected ? '#f59e0b' : dist.color || '#38bdf8'}
+                        fillOpacity={isSelected ? 0.9 : 0.55}
                         stroke={isSelected ? '#ffffff' : '#f59e0b'}
                         strokeWidth={isSelected ? 3.5 : 1.5}
                         filter={isSelected ? 'url(#glow)' : undefined}
-                        className="transition-all duration-300 group-hover:fill-opacity-80 group-hover:stroke-amber-300"
+                        className="transition-all duration-300 group-hover:fill-opacity-85 group-hover:stroke-amber-300"
                       />
 
                       {/* Hindi Label */}
@@ -223,7 +223,7 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({ onSelectPlant })
 
           </div>
 
-          {/* District Vegetation & Telemetry Side Drawer (5 cols) */}
+          {/* District Vegetation Side Panel (5 cols) */}
           <div className="lg:col-span-5 bg-stone-900/90 rounded-3xl p-6 sm:p-8 border border-amber-700/50 shadow-2xl space-y-6">
             
             {/* Selected District Header */}
@@ -240,7 +240,7 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({ onSelectPlant })
               <p className="text-xs text-amber-200/90 leading-relaxed">{selectedDistrict.geomorphology}</p>
             </div>
 
-            {/* Quick Environment Cards */}
+            {/* Environment Metrics */}
             <div className="grid grid-cols-2 gap-3 text-xs">
               <div className="p-3 rounded-2xl bg-amber-950/60 border border-amber-800/40 space-y-0.5">
                 <span className="text-amber-400 font-semibold flex items-center gap-1">
