@@ -122,11 +122,11 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({ onSelectPlant })
             {/* Plants List with Photos */}
             <div className="space-y-3">
               <span className="font-extrabold text-amber-300 text-sm flex items-center gap-2">
-                <Leaf className="w-4 h-4 text-emerald-400" /> Native Plants in {selectedDistrict.name} ({districtFlora.length}):
+                <Leaf className="w-4 h-4 text-emerald-400" /> Native Plants in {selectedDistrict.name} ({districtPlants.length}):
               </span>
 
               <div className="space-y-3 max-h-[340px] overflow-y-auto pr-1 custom-scrollbar">
-                {districtFlora.map((plant) => (
+                {districtPlants.map((plant: PlantSpecies) => (
                   <div
                     key={plant.id}
                     onClick={() => onSelectPlant(plant)}
