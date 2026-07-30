@@ -1,13 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
+import { AboutSection } from './components/AboutSection';
 import { InteractiveMap } from './components/InteractiveMap';
 import { VegetationExplorer } from './components/VegetationExplorer';
 import { HabitatExplorer } from './components/HabitatExplorer';
-import { TharBotanistAI } from './components/TharBotanistAI';
+import { DistrictVegetation } from './components/DistrictVegetation';
 import { EducationalSection } from './components/EducationalSection';
+import { ResearchLibrary } from './components/ResearchLibrary';
+import { TharBotanistAI } from './components/TharBotanistAI';
 import { PhotoGallery } from './components/PhotoGallery';
+import { ConservationSection } from './components/ConservationSection';
 import { PlantComparisonTool } from './components/PlantComparisonTool';
+import { CitizenScienceSection } from './components/CitizenScienceSection';
+import { ContactSection } from './components/ContactSection';
 import { AdminDashboard } from './components/AdminDashboard';
 import { PlantDetailModal } from './components/PlantDetailModal';
 import { SearchModal } from './components/SearchModal';
@@ -51,6 +57,10 @@ export function App() {
           />
         )}
 
+        {activeTab === 'about' && (
+          <AboutSection />
+        )}
+
         {activeTab === 'map' && (
           <InteractiveMap
             onSelectPlant={(plant) => setSelectedPlant(plant)}
@@ -67,20 +77,42 @@ export function App() {
           <HabitatExplorer />
         )}
 
-        {activeTab === 'chatbot' && (
-          <TharBotanistAI />
+        {activeTab === 'districts' && (
+          <DistrictVegetation
+            onSelectPlant={(plant) => setSelectedPlant(plant)}
+          />
         )}
 
         {activeTab === 'educational' && (
           <EducationalSection />
         )}
 
+        {activeTab === 'library' && (
+          <ResearchLibrary />
+        )}
+
+        {activeTab === 'chatbot' && (
+          <TharBotanistAI />
+        )}
+
         {activeTab === 'gallery' && (
           <PhotoGallery />
         )}
 
+        {activeTab === 'conservation' && (
+          <ConservationSection />
+        )}
+
         {activeTab === 'tools' && (
           <PlantComparisonTool />
+        )}
+
+        {activeTab === 'citizenscience' && (
+          <CitizenScienceSection />
+        )}
+
+        {activeTab === 'contact' && (
+          <ContactSection />
         )}
 
         {activeTab === 'admin' && (

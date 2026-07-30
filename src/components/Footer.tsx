@@ -1,5 +1,5 @@
 import React from 'react';
-import { Leaf, ShieldCheck, Heart, ExternalLink } from 'lucide-react';
+import { Leaf, ShieldCheck, Heart } from 'lucide-react';
 
 interface FooterProps {
   setActiveTab: (tab: string) => void;
@@ -25,27 +25,31 @@ export const Footer: React.FC<FooterProps> = ({ setActiveTab }) => {
             </p>
           </div>
 
-          {/* Col 2: Quick Links */}
+          {/* Col 2: Navigation Links */}
           <div className="space-y-2">
-            <h4 className="font-bold text-amber-100 text-sm">Atlas Sections</h4>
+            <h4 className="font-bold text-amber-100 text-sm">Navigation & Features</h4>
             <ul className="space-y-1.5 text-amber-300/80">
-              <li><button onClick={() => setActiveTab('map')} className="hover:text-amber-100">Interactive GIS Map</button></li>
-              <li><button onClick={() => setActiveTab('explorer')} className="hover:text-amber-100">Vegetation Explorer</button></li>
-              <li><button onClick={() => setActiveTab('habitats')} className="hover:text-amber-100">Ecosystem & Habitats</button></li>
-              <li><button onClick={() => setActiveTab('educational')} className="hover:text-amber-100">Desert Ecology & Bishnoi History</button></li>
-              <li><button onClick={() => setActiveTab('tools')} className="hover:text-amber-100">Plant Comparison & Flowering Calendar</button></li>
+              <li><button onClick={() => setActiveTab('hero')} className="hover:text-amber-100">Home</button></li>
+              <li><button onClick={() => setActiveTab('about')} className="hover:text-amber-100">About the Project</button></li>
+              <li><button onClick={() => setActiveTab('map')} className="hover:text-amber-100">Interactive Vegetation Map</button></li>
+              <li><button onClick={() => setActiveTab('explorer')} className="hover:text-amber-100">Species Explorer</button></li>
+              <li><button onClick={() => setActiveTab('habitats')} className="hover:text-amber-100">Habitats</button></li>
+              <li><button onClick={() => setActiveTab('districts')} className="hover:text-amber-100">District-wise Vegetation</button></li>
+              <li><button onClick={() => setActiveTab('educational')} className="hover:text-amber-100">Knowledge Centre</button></li>
             </ul>
           </div>
 
-          {/* Col 3: Research Source Citations */}
+          {/* Col 3: Research & AI */}
           <div className="space-y-2">
-            <h4 className="font-bold text-amber-100 text-sm">Knowledge Source</h4>
-            <p className="text-amber-300/80 leading-relaxed">
-              Based on the Monograph: <em>"Comprehensive Monograph on the Flora of the Thar Desert: Ecology, Ethnobotany, and Cultural Heritage"</em>.
-            </p>
-            <p className="text-[11px] text-emerald-400 font-semibold flex items-center gap-1 mt-2">
-              <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" /> 100% Grounded RAG Bot Included
-            </p>
+            <h4 className="font-bold text-amber-100 text-sm">Research & Community</h4>
+            <ul className="space-y-1.5 text-amber-300/80">
+              <li><button onClick={() => setActiveTab('library')} className="hover:text-amber-100">Research Library</button></li>
+              <li><button onClick={() => setActiveTab('chatbot')} className="hover:text-amber-100">AI Botanist (RAG)</button></li>
+              <li><button onClick={() => setActiveTab('gallery')} className="hover:text-amber-100">Photo Gallery</button></li>
+              <li><button onClick={() => setActiveTab('conservation')} className="hover:text-amber-100">Conservation</button></li>
+              <li><button onClick={() => setActiveTab('citizenscience')} className="hover:text-amber-100">Citizen Science (Future)</button></li>
+              <li><button onClick={() => setActiveTab('contact')} className="hover:text-amber-100">Contact & Feedback</button></li>
+            </ul>
           </div>
 
         </div>
