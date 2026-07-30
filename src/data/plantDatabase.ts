@@ -453,12 +453,12 @@ export const plantDatabase: PlantSpecies[] = [
     id: 'ziziphus-nummularia',
     scientificName: 'Ziziphus nummularia',
     hindiName: 'झाड़बेड़ी',
-    localName: 'Jharberi / Pala',
+    localName: 'Jharberi / Bordi / Pala',
     commonName: 'Wild Jujube Bush',
     family: 'Rhamnaceae',
     category: 'Shrub',
     taxonomicGroup: 'Magnoliopsida > Rosales > Rhamnaceae',
-    description: 'Thorny bush yielding protein-rich dry fodder (Pala) harvested annually for sheep and goats.',
+    description: 'Thorny green desert bush yielding protein-rich dry fodder (Pala) harvested annually for sheep and goats.',
     identification: ['Small circular velvety leaves', 'Paired stipular spines', 'Small red berries'],
     habitat: ['Interdunal Plains', 'Pasture Lands'],
     soilPreference: ['Sandy Loam'],
@@ -480,7 +480,7 @@ export const plantDatabase: PlantSpecies[] = [
     interestingFacts: ['Sprouts back rapidly from underground root tubers after clearance.'],
     endemic: false,
     districts: ['jodhpur', 'barmer', 'jaisalmer', 'bikaner', 'churu', 'pali', 'nagaur'],
-    imageUrl: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1000&q=80',
+    imageUrl: 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=1000&q=80',
     references: ['Research Monograph Section 4']
   },
   {
@@ -514,7 +514,7 @@ export const plantDatabase: PlantSpecies[] = [
     interestingFacts: ['Woody root yields intense high-temperature charcoal.'],
     endemic: false,
     districts: ['jaisalmer', 'bikaner', 'barmer', 'churu'],
-    imageUrl: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1000&q=80',
+    imageUrl: 'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1000&q=80',
     references: ['Research Monograph Section 4']
   },
   {
@@ -684,7 +684,7 @@ export const plantDatabase: PlantSpecies[] = [
     interestingFacts: ['Spines carry green leaves right on their sharp shafts.'],
     endemic: false,
     districts: ['pali', 'jodhpur', 'jalor', 'nagaur'],
-    imageUrl: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1000&q=80',
+    imageUrl: 'https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&w=1000&q=80',
     references: ['Research Monograph Section 4']
   },
 
@@ -856,7 +856,7 @@ export const plantDatabase: PlantSpecies[] = [
     interestingFacts: ['Stolons root at nodes creating living carpet on sand.'],
     endemic: true,
     districts: ['jaisalmer', 'bikaner', 'barmer'],
-    imageUrl: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1000&q=80',
+    imageUrl: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1000&q=80',
     references: ['Research Monograph Section 5']
   },
   {
@@ -992,7 +992,7 @@ export const plantDatabase: PlantSpecies[] = [
     interestingFacts: ['Three-pronged awns twist into topsoil to plant seeds automatically when wet.'],
     endemic: false,
     districts: ['barmer', 'jodhpur', 'pali', 'jalor'],
-    imageUrl: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1000&q=80',
+    imageUrl: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1000&q=80',
     references: ['Research Monograph Section 5']
   },
   {
