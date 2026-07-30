@@ -4,6 +4,7 @@ import { HeroSection } from './components/HeroSection';
 import { AboutSection } from './components/AboutSection';
 import { InteractiveMap } from './components/InteractiveMap';
 import { VegetationExplorer } from './components/VegetationExplorer';
+import { PlantNetScanner } from './components/PlantNetScanner';
 import { HabitatExplorer } from './components/HabitatExplorer';
 import { DistrictVegetation } from './components/DistrictVegetation';
 import { EducationalSection } from './components/EducationalSection';
@@ -69,6 +70,12 @@ export function App() {
 
         {activeTab === 'explorer' && (
           <VegetationExplorer
+            onSelectPlant={(plant) => setSelectedPlant(plant)}
+          />
+        )}
+
+        {activeTab === 'scanner' && (
+          <PlantNetScanner
             onSelectPlant={(plant) => setSelectedPlant(plant)}
           />
         )}

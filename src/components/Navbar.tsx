@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Compass, Leaf, Map, MessageSquare, BookOpen, Image, Settings, Sparkles, Search, SlidersHorizontal, Info, FileText, ShieldAlert, Smartphone, Mail, ChevronDown } from 'lucide-react';
+import { Compass, Leaf, Map, MessageSquare, BookOpen, Image, Settings, Sparkles, Search, SlidersHorizontal, Info, FileText, ShieldAlert, Smartphone, Mail, ChevronDown, Camera } from 'lucide-react';
 
 interface NavbarProps {
   activeTab: string;
@@ -23,6 +23,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab, onOpenS
     { id: 'about', label: 'About', icon: Info },
     { id: 'map', label: 'Interactive Map', icon: Map },
     { id: 'explorer', label: 'Species Explorer', icon: Leaf },
+    { id: 'scanner', label: 'Pl@ntNet AI', icon: Camera, badge: 'AI' },
     { id: 'habitats', label: 'Habitats', icon: BookOpen },
     { id: 'districts', label: 'District Vegetation', icon: Map },
     { id: 'educational', label: 'Knowledge Centre', icon: BookOpen },
@@ -60,7 +61,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab, onOpenS
                   Thar Native Vegetation Atlas
                 </span>
               </div>
-              <p className="text-[11px] text-amber-300/80 font-medium">Digital Ecology & TEK Knowledge Hub</p>
+              <p className="text-[11px] text-amber-300/80 font-medium">Digital Ecology & Pl@ntNet AI Engine</p>
             </div>
           </div>
 
@@ -137,11 +138,11 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab, onOpenS
             </button>
 
             <button
-              onClick={() => setActiveTab('chatbot')}
+              onClick={() => setActiveTab('scanner')}
               className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-xs shadow-lg"
             >
-              <Sparkles className="w-3.5 h-3.5 text-emerald-200 animate-spin" />
-              <span>AI Botanist</span>
+              <Camera className="w-3.5 h-3.5 text-emerald-200" />
+              <span>Pl@ntNet Visual AI</span>
             </button>
           </div>
 
