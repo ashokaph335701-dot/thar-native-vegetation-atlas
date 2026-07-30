@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Compass, Leaf, Map, MessageSquare, BookOpen, Image, Settings, Sparkles, Search, SlidersHorizontal, Info, FileText, ShieldAlert, Smartphone, Mail, ChevronDown, Camera } from 'lucide-react';
+import React, { useState, useRef, useEffect } from 'react';
+import { Compass, Leaf, Map, MessageSquare, BookOpen, Image, Settings, Sparkles, Search, SlidersHorizontal, Info, FileText, ShieldAlert, Smartphone, Mail, ChevronDown, Camera, X } from 'lucide-react';
 
 interface NavbarProps {
   activeTab: string;
@@ -12,78 +12,91 @@ interface NavItem {
   label: string;
   icon: React.ElementType;
   badge?: string;
+  description?: string;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab, onOpenSearch }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const mainNavItems: NavItem[] = [
+  // Close dropdown on outside click
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsDropdownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const coreNavItems: NavItem[] = [
     { id: 'hero', label: 'Home', icon: Compass },
-    { id: 'about', label: 'About', icon: Info },
     { id: 'map', label: 'Interactive Map', icon: Map },
     { id: 'explorer', label: 'Species Explorer', icon: Leaf },
-    { id: 'scanner', label: 'Pl@ntNet AI', icon: Camera, badge: 'AI' },
-    { id: 'habitats', label: 'Habitats', icon: BookOpen },
-    { id: 'districts', label: 'District Vegetation', icon: Map },
-    { id: 'educational', label: 'Knowledge Centre', icon: BookOpen },
-    { id: 'library', label: 'Research Library', icon: FileText },
+    { id: 'scanner', label: 'Pl@ntNet AI', icon: Camera, badge: 'NEW' },
     { id: 'chatbot', label: 'AI Botanist', icon: MessageSquare, badge: 'RAG' },
   ];
 
-  const secondaryNavItems: NavItem[] = [
-    { id: 'gallery', label: 'Gallery', icon: Image },
-    { id: 'conservation', label: 'Conservation', icon: ShieldAlert },
-    { id: 'tools', label: 'Compare & Calendar', icon: SlidersHorizontal },
-    { id: 'citizenscience', label: 'Citizen Science (Future)', icon: Smartphone },
-    { id: 'contact', label: 'Contact', icon: Mail },
-    { id: 'admin', label: 'Admin Portal', icon: Settings },
+  const dropdownNavItems: NavItem[] = [
+    { id: 'about', label: 'About the Project', icon: Info, description: 'Mission, CAZRI & BSI scientific collaboration' },
+    { id: 'habitats', label: 'Habitats & Ecosystems', icon: BookOpen, description: 'Sand dunes, Magras, Playas, Sewan grasslands, Orans' },
+    { id: 'districts', label: 'District Vegetation', icon: Map, description: 'Jaisalmer, Barmer, Jodhpur, Bikaner, Nagaur, Churu' },
+    { id: 'educational', label: 'Knowledge Centre', icon: BookOpen, description: 'Bishnoi Khejarli 1730 AD, Panchkuta anatomy, ecology' },
+    { id: 'library', label: 'Research Library', icon: FileText, description: 'Download PDF monographs, papers & vector chunks' },
+    { id: 'gallery', label: 'Photo Gallery', icon: Image, description: 'Categorized high-res photography archive' },
+    { id: 'conservation', label: 'Conservation', icon: ShieldAlert, description: 'Threats, invasive Prosopis juliflora, GIB cabling' },
+    { id: 'tools', label: 'Compare & Calendar', icon: SlidersHorizontal, description: 'Side-by-side plant matrix & flowering calendar' },
+    { id: 'citizenscience', label: 'Citizen Science (Future)', icon: Smartphone, description: 'Plant photo observations, satellite tracking, API' },
+    { id: 'contact', label: 'Contact & Feedback', icon: Mail, description: 'Academic inquiries & TEK data submissions' },
+    { id: 'admin', label: 'Admin Portal', icon: Settings, description: 'Re-index vector DB & update dataset records' },
   ];
 
-  const allNavItems: NavItem[] = [...mainNavItems, ...secondaryNavItems];
+  const allNavItems: NavItem[] = [...coreNavItems, ...dropdownNavItems];
 
   return (
-    <header className="sticky top-0 z-50 bg-amber-950/95 backdrop-blur-md border-b border-amber-800/40 text-amber-50 shadow-xl">
+    <header className="sticky top-0 z-50 bg-stone-950/95 backdrop-blur-md border-b border-amber-800/40 text-amber-50 shadow-2xl">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between h-20 gap-4">
           
           {/* Logo */}
           <div 
-            className="flex items-center gap-3 cursor-pointer group"
+            className="flex items-center gap-3 cursor-pointer group shrink-0"
             onClick={() => setActiveTab('hero')}
           >
             <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-amber-500 via-amber-600 to-emerald-700 flex items-center justify-center shadow-lg shadow-amber-900/40 group-hover:scale-105 transition-transform duration-300 border border-amber-400/30">
               <Leaf className="w-6 h-6 text-amber-100 animate-pulse" />
             </div>
             <div>
-              <div className="flex items-center gap-2">
-                <span className="text-lg font-bold tracking-tight bg-gradient-to-r from-amber-200 via-amber-100 to-emerald-200 bg-clip-text text-transparent">
-                  Thar Native Vegetation Atlas
-                </span>
-              </div>
-              <p className="text-[11px] text-amber-300/80 font-medium">Digital Ecology & Pl@ntNet AI Engine</p>
+              <span className="text-lg font-bold tracking-tight bg-gradient-to-r from-amber-200 via-amber-100 to-emerald-200 bg-clip-text text-transparent block">
+                Thar Native Vegetation Atlas
+              </span>
+              <span className="text-[10px] text-amber-300/80 font-medium tracking-wide block">
+                Digital Ecology & Pl@ntNet AI Hub
+              </span>
             </div>
           </div>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden xl:flex items-center gap-1 text-xs">
-            {mainNavItems.map((item) => {
+          <nav className="hidden lg:flex items-center gap-1.5 text-xs font-semibold">
+            {coreNavItems.map((item) => {
               const Icon = item.icon;
               const isActive = activeTab === item.id;
               return (
                 <button
                   key={item.id}
                   onClick={() => setActiveTab(item.id)}
-                  className={`flex items-center gap-1.5 px-2.5 py-2 rounded-lg font-medium transition-all ${
+                  className={`flex items-center gap-1.5 px-3 py-2 rounded-xl transition-all whitespace-nowrap ${
                     isActive
-                      ? 'bg-amber-800/60 text-amber-100 border border-amber-600/40'
-                      : 'text-amber-200/80 hover:text-amber-100 hover:bg-amber-900/40'
+                      ? 'bg-amber-800/80 text-amber-100 border border-amber-600/50 shadow-inner'
+                      : 'text-amber-200/90 hover:text-amber-100 hover:bg-amber-900/40'
                   }`}
                 >
-                  <Icon className={`w-3.5 h-3.5 ${isActive ? 'text-amber-400' : 'text-amber-400/70'}`} />
+                  <Icon className={`w-4 h-4 ${isActive ? 'text-amber-400' : 'text-amber-400/70'}`} />
                   <span>{item.label}</span>
                   {item.badge && (
-                    <span className="px-1 py-0.2 text-[9px] font-bold bg-amber-500 text-amber-950 rounded-full animate-pulse">
+                    <span className="px-1.5 py-0.2 text-[9px] font-extrabold bg-amber-500 text-amber-950 rounded-full animate-pulse">
                       {item.badge}
                     </span>
                   )}
@@ -91,20 +104,26 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab, onOpenS
               );
             })}
 
-            {/* More Menu Dropdown */}
-            <div className="relative">
+            {/* Dropdown for All Sections */}
+            <div className="relative" ref={dropdownRef}>
               <button
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                className="flex items-center gap-1 px-2.5 py-2 rounded-lg font-medium text-amber-200/80 hover:text-amber-100 hover:bg-amber-900/40"
+                className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl transition-all whitespace-nowrap border ${
+                  isDropdownOpen
+                    ? 'bg-amber-800 text-amber-100 border-amber-600'
+                    : 'bg-amber-950/60 text-amber-200/90 hover:bg-amber-900/40 border-amber-800/40'
+                }`}
               >
-                <span>More</span>
-                <ChevronDown className="w-3.5 h-3.5" />
+                <span>All Sections</span>
+                <ChevronDown className={`w-4 h-4 text-amber-400 transition-transform ${isDropdownOpen ? 'rotate-180' : ''}`} />
               </button>
 
+              {/* Mega Dropdown Menu */}
               {isDropdownOpen && (
-                <div className="absolute right-0 mt-2 w-56 rounded-2xl bg-stone-900 border border-amber-800/60 shadow-2xl p-2 z-50 space-y-1">
-                  {secondaryNavItems.map((item) => {
+                <div className="absolute right-0 mt-3 w-80 sm:w-[480px] rounded-3xl bg-stone-900/98 border border-amber-700/60 shadow-2xl p-4 z-50 grid grid-cols-1 sm:grid-cols-2 gap-2 backdrop-blur-xl animate-fadeIn">
+                  {dropdownNavItems.map((item) => {
                     const Icon = item.icon;
+                    const isActive = activeTab === item.id;
                     return (
                       <button
                         key={item.id}
@@ -112,12 +131,25 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab, onOpenS
                           setActiveTab(item.id);
                           setIsDropdownOpen(false);
                         }}
-                        className={`w-full flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-medium text-left ${
-                          activeTab === item.id ? 'bg-amber-800/80 text-amber-100' : 'text-amber-200/80 hover:bg-amber-900/40'
+                        className={`p-3 rounded-2xl text-left transition-all flex items-start gap-3 group ${
+                          isActive
+                            ? 'bg-amber-800/80 text-amber-100 border border-amber-600/50'
+                            : 'hover:bg-amber-950/80 text-amber-200/90 border border-transparent'
                         }`}
                       >
-                        <Icon className="w-4 h-4 text-amber-400" />
-                        <span>{item.label}</span>
+                        <div className="w-8 h-8 rounded-xl bg-amber-950/80 border border-amber-700/40 flex items-center justify-center shrink-0 text-amber-400 group-hover:scale-105 transition-transform">
+                          <Icon className="w-4 h-4" />
+                        </div>
+                        <div>
+                          <span className="font-bold text-xs text-amber-100 block group-hover:text-amber-300">
+                            {item.label}
+                          </span>
+                          {item.description && (
+                            <span className="text-[10px] text-amber-400/70 block mt-0.5 line-clamp-1">
+                              {item.description}
+                            </span>
+                          )}
+                        </div>
                       </button>
                     );
                   })}
@@ -126,48 +158,58 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab, onOpenS
             </div>
           </nav>
 
-          {/* Right Actions */}
-          <div className="hidden sm:flex items-center gap-2">
+          {/* Right Action Buttons */}
+          <div className="hidden sm:flex items-center gap-2.5 shrink-0">
             <button
               onClick={onOpenSearch}
-              className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-amber-900/50 hover:bg-amber-800/60 border border-amber-700/50 text-amber-200 text-xs font-medium"
+              className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-amber-950/80 hover:bg-amber-900/60 border border-amber-700/50 text-amber-200 text-xs font-semibold transition-all shadow-sm"
+              title="Global Intelligent Search (Ctrl+K)"
             >
-              <Search className="w-3.5 h-3.5 text-amber-400" />
+              <Search className="w-4 h-4 text-amber-400" />
               <span>Search</span>
-              <kbd className="px-1 py-0.5 text-[9px] bg-amber-950 border border-amber-700/40 text-amber-400 rounded">⌘K</kbd>
+              <kbd className="px-1.5 py-0.5 text-[10px] bg-stone-900 border border-amber-700/40 text-amber-400 rounded">⌘K</kbd>
             </button>
 
             <button
               onClick={() => setActiveTab('scanner')}
-              className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-xs shadow-lg"
+              className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-600 via-emerald-700 to-teal-700 hover:from-emerald-500 hover:to-teal-600 text-white font-bold text-xs shadow-lg shadow-emerald-950/50 border border-emerald-400/30 transition-all hover:scale-105"
             >
-              <Camera className="w-3.5 h-3.5 text-emerald-200" />
-              <span>Pl@ntNet Visual AI</span>
+              <Camera className="w-4 h-4 text-emerald-200" />
+              <span>Pl@ntNet AI</span>
             </button>
           </div>
 
-          {/* Mobile hamburger */}
-          <div className="flex xl:hidden items-center gap-2">
+          {/* Mobile Menu Toggle Button */}
+          <div className="flex lg:hidden items-center gap-2">
+            <button
+              onClick={onOpenSearch}
+              className="p-2 rounded-xl bg-amber-950/80 text-amber-200 border border-amber-700/50"
+            >
+              <Search className="w-5 h-5 text-amber-400" />
+            </button>
+
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="p-2 rounded-xl bg-amber-900/80 text-amber-200 border border-amber-700/50"
+              className="p-2 rounded-xl bg-amber-950/80 text-amber-200 border border-amber-700/50 focus:outline-none"
             >
-              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                {isMobileMenuOpen ? (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                ) : (
+              {isMobileMenuOpen ? (
+                <X className="w-6 h-6 text-amber-300" />
+              ) : (
+                <svg className="w-6 h-6 text-amber-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                )}
-              </svg>
+                </svg>
+              )}
             </button>
           </div>
+
         </div>
 
-        {/* Mobile menu drawer */}
+        {/* Mobile Menu Drawer */}
         {isMobileMenuOpen && (
-          <div className="xl:hidden py-4 border-t border-amber-800/40 space-y-1 max-h-[75vh] overflow-y-auto">
+          <div className="lg:hidden py-4 border-t border-amber-800/40 space-y-1.5 max-h-[80vh] overflow-y-auto custom-scrollbar">
             {allNavItems.map((item) => {
               const Icon = item.icon;
+              const isActive = activeTab === item.id;
               return (
                 <button
                   key={item.id}
@@ -175,8 +217,10 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab, onOpenS
                     setActiveTab(item.id);
                     setIsMobileMenuOpen(false);
                   }}
-                  className={`w-full flex items-center justify-between px-4 py-2.5 rounded-lg text-xs font-medium ${
-                    activeTab === item.id ? 'bg-amber-800/80 text-amber-100' : 'text-amber-200/80 hover:bg-amber-900/40'
+                  className={`w-full flex items-center justify-between px-4 py-3 rounded-2xl text-xs font-semibold ${
+                    isActive
+                      ? 'bg-amber-800/90 text-amber-100 border border-amber-600/50'
+                      : 'text-amber-200/90 hover:bg-amber-950/60'
                   }`}
                 >
                   <div className="flex items-center gap-3">
