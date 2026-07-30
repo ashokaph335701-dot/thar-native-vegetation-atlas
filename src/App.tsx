@@ -1,28 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
-import { HeroSection } from './components/HeroSection';
 import { AboutSection } from './components/AboutSection';
 import { InteractiveMap } from './components/InteractiveMap';
 import { VegetationExplorer } from './components/VegetationExplorer';
-import { PlantNetScanner } from './components/PlantNetScanner';
-import { HabitatExplorer } from './components/HabitatExplorer';
-import { DistrictVegetation } from './components/DistrictVegetation';
-import { EducationalSection } from './components/EducationalSection';
-import { ResearchLibrary } from './components/ResearchLibrary';
 import { TharBotanistAI } from './components/TharBotanistAI';
-import { PhotoGallery } from './components/PhotoGallery';
-import { ConservationSection } from './components/ConservationSection';
-import { PlantComparisonTool } from './components/PlantComparisonTool';
-import { CitizenScienceSection } from './components/CitizenScienceSection';
-import { ContactSection } from './components/ContactSection';
-import { AdminDashboard } from './components/AdminDashboard';
 import { PlantDetailModal } from './components/PlantDetailModal';
 import { SearchModal } from './components/SearchModal';
 import { Footer } from './components/Footer';
 import { PlantSpecies } from './types';
 
 export function App() {
-  const [activeTab, setActiveTab] = useState<string>('hero');
+  // Set default active tab directly to 'map' so the Interactive Rajasthan Map opens immediately on page load!
+  const [activeTab, setActiveTab] = useState<string>('map');
   const [selectedPlant, setSelectedPlant] = useState<PlantSpecies | null>(null);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
 
@@ -50,18 +39,6 @@ export function App() {
 
       {/* Main View Renderer */}
       <main className="flex-1">
-        {activeTab === 'hero' && (
-          <HeroSection
-            onExploreAtlas={() => setActiveTab('map')}
-            onAskAI={() => setActiveTab('chatbot')}
-            onExploreSpecies={() => setActiveTab('explorer')}
-          />
-        )}
-
-        {activeTab === 'about' && (
-          <AboutSection />
-        )}
-
         {activeTab === 'map' && (
           <InteractiveMap
             onSelectPlant={(plant) => setSelectedPlant(plant)}
@@ -74,56 +51,12 @@ export function App() {
           />
         )}
 
-        {activeTab === 'scanner' && (
-          <PlantNetScanner
-            onSelectPlant={(plant) => setSelectedPlant(plant)}
-          />
-        )}
-
-        {activeTab === 'habitats' && (
-          <HabitatExplorer />
-        )}
-
-        {activeTab === 'districts' && (
-          <DistrictVegetation
-            onSelectPlant={(plant) => setSelectedPlant(plant)}
-          />
-        )}
-
-        {activeTab === 'educational' && (
-          <EducationalSection />
-        )}
-
-        {activeTab === 'library' && (
-          <ResearchLibrary />
-        )}
-
         {activeTab === 'chatbot' && (
           <TharBotanistAI />
         )}
 
-        {activeTab === 'gallery' && (
-          <PhotoGallery />
-        )}
-
-        {activeTab === 'conservation' && (
-          <ConservationSection />
-        )}
-
-        {activeTab === 'tools' && (
-          <PlantComparisonTool />
-        )}
-
-        {activeTab === 'citizenscience' && (
-          <CitizenScienceSection />
-        )}
-
-        {activeTab === 'contact' && (
-          <ContactSection />
-        )}
-
-        {activeTab === 'admin' && (
-          <AdminDashboard />
+        {activeTab === 'about' && (
+          <AboutSection />
         )}
       </main>
 
