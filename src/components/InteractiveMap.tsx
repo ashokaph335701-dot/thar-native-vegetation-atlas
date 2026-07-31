@@ -21,7 +21,6 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({ onSelectPlant })
   const nativePlants = districtFlora.filter(p => p.category === 'Grass' || p.category === 'Herb' || p.category === 'Vegetable');
 
   // Seamless contiguous SVG polygon map of Western Rajasthan districts
-  // All adjacent polygons share exact vertex coordinates so there are NO gaps!
   const districtPaths: { [key: string]: { path: string; labelX: number; labelY: number; labelHindi: string; labelEng: string } } = {
     jaisalmer: {
       path: "M 20,170 L 90,120 L 170,140 L 175,200 L 165,250 L 175,290 L 140,320 L 70,300 L 20,230 Z",
@@ -96,43 +95,43 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({ onSelectPlant })
   };
 
   return (
-    <section className="py-12 bg-stone-950 text-amber-50 min-h-screen">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+    <section className="py-16 bg-[#F5F1E8] text-[#333333] min-h-screen">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
         
         {/* Title Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-2">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-900/60 border border-amber-600/40 text-amber-300 text-xs font-bold shadow-lg">
-            <MapPin className="w-4 h-4 text-amber-400" />
-            <span>Contiguous Rajasthan State District Map</span>
+        <div className="text-center max-w-3xl mx-auto space-y-3">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#FAF8F3] border border-[#E8D8B5] text-[#556B2F] text-xs font-nav font-semibold shadow-sm">
+            <MapPin className="w-4 h-4 text-[#6B8E23]" />
+            <span>Contiguous Rajasthan Cartography</span>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-amber-100">
+          <h2 className="text-3xl sm:text-5xl font-serif-heading font-bold text-[#4A3B2A]">
             Interactive Rajasthan Vegetation Map
           </h2>
-          <p className="text-sm text-amber-300/80 leading-relaxed">
+          <p className="text-base font-sans text-[#333333]/80 leading-relaxed">
             Click on any district on the authentic Rajasthan state map to explore its native trees, shrubs, and vegetation.
           </p>
         </div>
 
-        {/* Map & District Information Panel Layout */}
+        {/* Map & Information Panel Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
           {/* Base SVG Map of Rajasthan (7 cols) */}
-          <div className="lg:col-span-7 bg-stone-900/90 rounded-3xl p-6 border border-amber-800/50 shadow-2xl space-y-4">
+          <div className="lg:col-span-7 bg-[#FAF8F3] rounded-3xl p-6 sm:p-8 border border-[#E8D8B5] premium-shadow space-y-4">
             
             {/* Quick District Selector Ribbon */}
-            <div className="flex items-center justify-between pb-3 border-b border-amber-800/30 text-xs flex-wrap gap-2">
-              <span className="font-bold text-amber-400 flex items-center gap-1.5">
-                <Info className="w-4 h-4 text-amber-400" /> Select District:
+            <div className="flex items-center justify-between pb-4 border-b border-[#E8D8B5] text-xs flex-wrap gap-2">
+              <span className="font-serif-heading font-bold text-base text-[#4A3B2A] flex items-center gap-2">
+                <Info className="w-4 h-4 text-[#556B2F]" /> Select District:
               </span>
-              <div className="flex items-center gap-1 overflow-x-auto scrollbar-none py-1">
+              <div className="flex items-center gap-1.5 overflow-x-auto scrollbar-none py-1">
                 {districtDatabase.map((dist) => (
                   <button
                     key={dist.id}
                     onClick={() => setSelectedDistrict(dist)}
-                    className={`px-3 py-1 rounded-xl text-[11px] font-bold transition-all whitespace-nowrap ${
+                    className={`px-3 py-1.5 rounded-xl text-xs font-nav transition-all whitespace-nowrap ${
                       selectedDistrict.id === dist.id
-                        ? 'bg-amber-500 text-amber-950 shadow-md scale-105'
-                        : 'bg-amber-950/60 text-amber-200 hover:bg-amber-900/40 border border-amber-800/40'
+                        ? 'bg-[#556B2F] text-white shadow-md font-semibold'
+                        : 'bg-[#F5F1E8] text-[#4A3B2A] hover:bg-[#E8D8B5]/40 border border-[#E8D8B5]'
                     }`}
                   >
                     {dist.hindiName} ({dist.name})
@@ -141,26 +140,19 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({ onSelectPlant })
               </div>
             </div>
 
-            {/* Seamless Contiguous Base Vector Map */}
-            <div className="relative w-full h-[480px] sm:h-[540px] bg-gradient-to-br from-stone-950 via-stone-900 to-amber-950/90 rounded-2xl border border-amber-800/40 p-2 flex items-center justify-center overflow-hidden">
+            {/* Seamless Contiguous Base Vector Map Canvas */}
+            <div className="relative w-full h-[480px] sm:h-[540px] bg-[#F5F1E8] rounded-2xl border border-[#E8D8B5] p-4 flex items-center justify-center overflow-hidden">
               
-              <svg viewBox="0 0 400 500" className="w-full h-full filter drop-shadow-2xl">
+              <svg viewBox="0 0 400 500" className="w-full h-full filter drop-shadow-md">
                 
-                <defs>
-                  <filter id="mapGlow" x="-20%" y="-20%" width="140%" height="140%">
-                    <feGaussianBlur stdDeviation="3" result="blur" />
-                    <feComposite in="SourceGraphic" in2="blur" operator="over" />
-                  </filter>
-                </defs>
-
                 {/* Overall Rajasthan State Boundary Outline */}
                 <path
                   d="M 20,170 L 90,120 L 170,140 L 250,30 L 310,70 L 365,90 L 380,165 L 330,195 L 365,225 L 340,295 L 275,330 L 285,395 L 245,445 L 220,435 L 190,475 L 135,460 L 150,440 L 90,420 L 40,375 L 70,300 L 20,230 Z"
                   fill="none"
-                  stroke="#fbbf24"
+                  stroke="#B65A3C"
                   strokeWidth="3.5"
                   strokeDasharray="6 3"
-                  className="opacity-70"
+                  className="opacity-60"
                 />
 
                 {/* Contiguous District Polygons */}
@@ -173,22 +165,21 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({ onSelectPlant })
                     <g key={dist.id} className="cursor-pointer group" onClick={() => setSelectedDistrict(dist)}>
                       <path
                         d={geom.path}
-                        fill={isSelected ? '#f59e0b' : dist.color || '#38bdf8'}
-                        fillOpacity={isSelected ? 0.95 : 0.65}
-                        stroke={isSelected ? '#ffffff' : '#1c1917'}
+                        fill={isSelected ? '#B65A3C' : dist.color || '#556B2F'}
+                        fillOpacity={isSelected ? 0.95 : 0.75}
+                        stroke={isSelected ? '#ffffff' : '#FAF8F3'}
                         strokeWidth={isSelected ? 3.5 : 1.8}
                         strokeLinejoin="round"
                         strokeLinecap="round"
-                        filter={isSelected ? 'url(#mapGlow)' : undefined}
-                        className="transition-all duration-300 group-hover:fill-opacity-90 group-hover:stroke-amber-200"
+                        className="transition-all duration-300 group-hover:fill-opacity-90"
                       />
 
                       <text
                         x={geom.labelX}
                         y={geom.labelY - 3}
                         textAnchor="middle"
-                        fill={isSelected ? '#0c0a09' : '#ffffff'}
-                        fontSize={isSelected ? '14' : '11.5'}
+                        fill="#ffffff"
+                        fontSize={isSelected ? '14' : '12'}
                         fontWeight="800"
                         className="pointer-events-none transition-all drop-shadow-md"
                       >
@@ -199,7 +190,7 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({ onSelectPlant })
                         x={geom.labelX}
                         y={geom.labelY + 9}
                         textAnchor="middle"
-                        fill={isSelected ? '#0c0a09' : '#fef3c7'}
+                        fill="#FAF8F3"
                         fontSize={isSelected ? '11' : '9.5'}
                         fontWeight="700"
                         className="pointer-events-none opacity-90"
@@ -217,41 +208,41 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({ onSelectPlant })
           </div>
 
           {/* Simple Information Panel (5 cols) */}
-          <div className="lg:col-span-5 bg-stone-900/90 rounded-3xl p-6 sm:p-8 border border-amber-700/50 shadow-2xl space-y-6">
+          <div className="lg:col-span-5 bg-[#FAF8F3] rounded-3xl p-6 sm:p-8 border border-[#E8D8B5] premium-shadow space-y-6">
             
             {/* 1. District Name */}
-            <div className="pb-4 border-b border-amber-800/40 space-y-2">
+            <div className="pb-4 border-b border-[#E8D8B5] space-y-2">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <h3 className="text-2xl sm:text-3xl font-extrabold text-amber-100">{selectedDistrict.name}</h3>
-                  <span className="text-xl font-bold text-amber-400">({selectedDistrict.hindiName})</span>
+                  <h3 className="text-3xl font-serif-heading font-bold text-[#4A3B2A]">{selectedDistrict.name}</h3>
+                  <span className="text-xl font-serif-heading text-[#B65A3C]">({selectedDistrict.hindiName})</span>
                 </div>
-                <span className="px-3.5 py-1 rounded-full bg-amber-500 text-amber-950 text-xs font-extrabold shadow-md">
+                <span className="px-3.5 py-1 rounded-full bg-[#556B2F] text-white text-xs font-nav font-semibold shadow-sm">
                   {selectedDistrict.rainfallRange}
                 </span>
               </div>
             </div>
 
             {/* 2. Brief Ecological Description */}
-            <div className="space-y-1.5 p-4 rounded-2xl bg-amber-950/50 border border-amber-800/40 text-xs sm:text-sm">
-              <h4 className="font-extrabold text-amber-400 text-xs uppercase tracking-wider">Brief Ecological Description:</h4>
-              <p className="text-amber-100/90 leading-relaxed">{selectedDistrict.geomorphology}</p>
+            <div className="space-y-1.5 p-4 rounded-2xl bg-[#F5F1E8] border border-[#E8D8B5] text-xs sm:text-sm font-sans">
+              <h4 className="font-serif-heading font-bold text-[#4A3B2A] text-sm uppercase tracking-wider">Brief Ecological Description:</h4>
+              <p className="text-[#333333]/90 leading-relaxed">{selectedDistrict.geomorphology}</p>
             </div>
 
             {/* 3. Major Native Trees */}
             <div className="space-y-2 text-xs">
-              <h4 className="font-extrabold text-amber-300 text-xs uppercase tracking-wider flex items-center gap-1.5">
-                <TreePine className="w-4 h-4 text-emerald-400" /> Major Native Trees ({majorTrees.length}):
+              <h4 className="font-serif-heading font-bold text-[#4A3B2A] text-sm uppercase tracking-wider flex items-center gap-1.5">
+                <TreePine className="w-4 h-4 text-[#556B2F]" /> Major Native Trees ({majorTrees.length}):
               </h4>
               <div className="flex flex-wrap gap-1.5">
                 {majorTrees.map((tree) => (
                   <button
                     key={tree.id}
                     onClick={() => onSelectPlant(tree)}
-                    className="px-3 py-1.5 rounded-xl bg-amber-950/60 hover:bg-amber-800/60 border border-amber-700/40 text-amber-100 font-semibold transition-colors flex items-center gap-1"
+                    className="px-3 py-1.5 rounded-xl bg-[#F5F1E8] hover:bg-[#E8D8B5]/50 border border-[#E8D8B5] text-[#4A3B2A] font-nav font-medium transition-colors flex items-center gap-1"
                   >
                     <span>{tree.localName}</span>
-                    <span className="text-[10px] text-amber-400 italic">({tree.scientificName})</span>
+                    <span className="text-[10px] text-[#B65A3C] italic">({tree.scientificName})</span>
                   </button>
                 ))}
               </div>
@@ -259,18 +250,18 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({ onSelectPlant })
 
             {/* 4. Major Shrubs */}
             <div className="space-y-2 text-xs">
-              <h4 className="font-extrabold text-amber-300 text-xs uppercase tracking-wider flex items-center gap-1.5">
-                <Leaf className="w-4 h-4 text-emerald-400" /> Major Shrubs ({majorShrubs.length}):
+              <h4 className="font-serif-heading font-bold text-[#4A3B2A] text-sm uppercase tracking-wider flex items-center gap-1.5">
+                <Leaf className="w-4 h-4 text-[#556B2F]" /> Major Shrubs ({majorShrubs.length}):
               </h4>
               <div className="flex flex-wrap gap-1.5">
                 {majorShrubs.map((shrub) => (
                   <button
                     key={shrub.id}
                     onClick={() => onSelectPlant(shrub)}
-                    className="px-3 py-1.5 rounded-xl bg-amber-950/60 hover:bg-amber-800/60 border border-amber-700/40 text-amber-100 font-semibold transition-colors flex items-center gap-1"
+                    className="px-3 py-1.5 rounded-xl bg-[#F5F1E8] hover:bg-[#E8D8B5]/50 border border-[#E8D8B5] text-[#4A3B2A] font-nav font-medium transition-colors flex items-center gap-1"
                   >
                     <span>{shrub.localName}</span>
-                    <span className="text-[10px] text-amber-400 italic">({shrub.scientificName})</span>
+                    <span className="text-[10px] text-[#B65A3C] italic">({shrub.scientificName})</span>
                   </button>
                 ))}
               </div>
@@ -278,18 +269,18 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({ onSelectPlant })
 
             {/* 5. Native Plants & Vegetables */}
             <div className="space-y-2 text-xs pt-1">
-              <h4 className="font-extrabold text-amber-300 text-xs uppercase tracking-wider flex items-center gap-1.5">
-                <Utensils className="w-4 h-4 text-amber-400" /> Native Plants & Vegetables ({nativePlants.length}):
+              <h4 className="font-serif-heading font-bold text-[#4A3B2A] text-sm uppercase tracking-wider flex items-center gap-1.5">
+                <Utensils className="w-4 h-4 text-[#B65A3C]" /> Native Plants & Vegetables ({nativePlants.length}):
               </h4>
               <div className="flex flex-wrap gap-1.5">
                 {nativePlants.map((plant) => (
                   <button
                     key={plant.id}
                     onClick={() => onSelectPlant(plant)}
-                    className="px-3 py-1.5 rounded-xl bg-amber-950/60 hover:bg-amber-800/60 border border-amber-700/40 text-amber-100 font-semibold transition-colors flex items-center gap-1"
+                    className="px-3 py-1.5 rounded-xl bg-[#F5F1E8] hover:bg-[#E8D8B5]/50 border border-[#E8D8B5] text-[#4A3B2A] font-nav font-medium transition-colors flex items-center gap-1"
                   >
                     <span>{plant.localName}</span>
-                    <span className="text-[10px] text-amber-400 italic">({plant.scientificName})</span>
+                    <span className="text-[10px] text-[#B65A3C] italic">({plant.scientificName})</span>
                   </button>
                 ))}
               </div>

@@ -10,7 +10,7 @@ export const districtDatabase: DistrictData[] = [
     geomorphology: 'Hyper-arid shifting sand dunes (Sam & Khuri), interdunal flats, hyper-saline playas, and sparse rocky plateaus. Home to the core Great Indian Bustard breeding habitat.',
     dominantVegetation: ['Lasiurus scindicus (Sewan Grass)', 'Prosopis cineraria (Khejri)', 'Calligonum polygonoides (Phog)', 'Capparis decidua (Ker)', 'Citrullus colocynthis (Tumba)'],
     mapCoordinates: { x: 22, y: 44 },
-    color: '#38bdf8'
+    color: '#D97706'
   },
   {
     id: 'barmer',
@@ -21,7 +21,7 @@ export const districtDatabase: DistrictData[] = [
     geomorphology: 'Extensive sand dunes, gravelly pediments (Magras), volcanic hillocks (Siwana), and dry salt basins. Rich in traditional ethno-botanical gums and resinous shrubs.',
     dominantVegetation: ['Tecomella undulata (Rohida)', 'Acacia senegal (Kumatiyo)', 'Commiphora wightii (Guggal)', 'Salvadora oleoides (Jaal)', 'Ziziphus nummularia (Bordi)'],
     mapCoordinates: { x: 20, y: 64 },
-    color: '#a855f7'
+    color: '#B65A3C'
   },
   {
     id: 'balotra',
@@ -33,7 +33,7 @@ export const districtDatabase: DistrictData[] = [
     geomorphology: 'Luni River basin, saline alluvial tracts, and rocky granite outcrops around Pachpadra salt basin.',
     dominantVegetation: ['Salvadora persica (Meetha Jaal)', 'Capparis decidua (Ker)', 'Acacia nilotica (Babool)', 'Cucumis melo (Kachri)'],
     mapCoordinates: { x: 30, y: 61 },
-    color: '#eab308'
+    color: '#A16207'
   },
   {
     id: 'phalodi',
@@ -44,7 +44,7 @@ export const districtDatabase: DistrictData[] = [
     geomorphology: 'Salt playas (Phalodi Salt Lake), flat interdunal gravel plains, and hyper-arid scrublands.',
     dominantVegetation: ['Salvadora oleoides (Kharo Jaal)', 'Calligonum polygonoides (Phog)', 'Cenchrus biflorus (Bhurat)', 'Calotropis procera (Aak)'],
     mapCoordinates: { x: 34, y: 41 },
-    color: '#84cc16'
+    color: '#6B8E23'
   },
   {
     id: 'jodhpur',
@@ -55,7 +55,7 @@ export const districtDatabase: DistrictData[] = [
     geomorphology: 'Rocky sandstone plateaus (Marwar Magras), semi-arid alluvial plains, and ancient protected sacred groves (Orans like Khejarli and Osian).',
     dominantVegetation: ['Prosopis cineraria (Khejri)', 'Tecomella undulata (Rohida)', 'Acacia senegal (Kumatiyo)', 'Withania somnifera (Ashwagandha)', 'Cordia dichotoma (Gunda)'],
     mapCoordinates: { x: 40, y: 53 },
-    color: '#0284c7'
+    color: '#556B2F'
   },
   {
     id: 'bikaner',
@@ -66,7 +66,7 @@ export const districtDatabase: DistrictData[] = [
     geomorphology: 'Northern Thar sand dune complexes, interdunal clay depressions, and protected Orans (Deshnoke Karni Mata Oran).',
     dominantVegetation: ['Prosopis cineraria (Khejri)', 'Lasiurus scindicus (Sewan)', 'Calligonum polygonoides (Phog)', 'Aerva javanica (Bui)', 'Panicum turgidum (Murut)'],
     mapCoordinates: { x: 42, y: 28 },
-    color: '#f43f5e'
+    color: '#92400E'
   },
   {
     id: 'churu',
@@ -77,7 +77,7 @@ export const districtDatabase: DistrictData[] = [
     geomorphology: 'High-amplitude sand dunes, shifting sand ridges, and Tal Chhapar blackbuck grassland sanctuary.',
     dominantVegetation: ['Calligonum polygonoides (Phog)', 'Prosopis cineraria (Khejri)', 'Cenchrus biflorus (Bhurat)', 'Ziziphus nummularia (Bordi)'],
     mapCoordinates: { x: 57, y: 23 },
-    color: '#a855f7'
+    color: '#78350F'
   },
   {
     id: 'nagaur',
@@ -88,7 +88,7 @@ export const districtDatabase: DistrictData[] = [
     geomorphology: 'Central Rajasthan alluvial plains, saline depressions (Didwana & Sambhar basin edges), and dense agricultural Khejri agroforestry belts.',
     dominantVegetation: ['Prosopis cineraria (Khejri)', 'Acacia nilotica (Babool)', 'Ziziphus mauritiana (Ber)', 'Cucumis melo (Kachri)', 'Boerhavia diffusa (Punarnava)'],
     mapCoordinates: { x: 50, y: 44 },
-    color: '#ec4899'
+    color: '#B65A3C'
   },
   {
     id: 'pali',
@@ -99,7 +99,7 @@ export const districtDatabase: DistrictData[] = [
     geomorphology: 'Western Aravalli foothills, gravelly stream beds, and semi-arid savannah transition zone.',
     dominantVegetation: ['Acacia senegal (Kumatiyo)', 'Tecomella undulata (Rohida)', 'Dalbergia sissoo (Shisham)', 'Saccharum bengalense (Munj)'],
     mapCoordinates: { x: 44, y: 66 },
-    color: '#38bdf8'
+    color: '#556B2F'
   },
   {
     id: 'jalor',
@@ -110,6 +110,6 @@ export const districtDatabase: DistrictData[] = [
     geomorphology: 'Granite hills (Jalor Fort hillocks), Luni river floodplains, and southern desert scrub boundary.',
     dominantVegetation: ['Tecomella undulata (Rohida)', 'Acacia senegal (Kumatiyo)', 'Capparis decidua (Ker)', 'Salvadora oleoides (Jaal)'],
     mapCoordinates: { x: 32, y: 73 },
-    color: '#f97316'
+    color: '#D97706'
   }
 ];

@@ -40,7 +40,7 @@ export const VisitorContributionSection: React.FC = () => {
   });
 
   const [activeTab, setActiveTab] = useState<'submit' | 'admin' | 'approved'>('submit');
-  const [isAdminMode, setIsAdminMode] = useState(true); // Default enabled for easy evaluation
+  const [isAdminMode, setIsAdminMode] = useState(true);
   const [editingSubId, setEditingSubId] = useState<string | null>(null);
 
   // Form State
@@ -55,12 +55,10 @@ export const VisitorContributionSection: React.FC = () => {
   const [contributorName, setContributorName] = useState('');
   const [submitSuccess, setSubmitSuccess] = useState(false);
 
-  // Save submissions to localStorage
   useEffect(() => {
     localStorage.setItem('thar_visitor_submissions', JSON.stringify(submissions));
   }, [submissions]);
 
-  // Handle Photo File Upload Preview
   const handlePhotoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
@@ -72,7 +70,6 @@ export const VisitorContributionSection: React.FC = () => {
     }
   };
 
-  // Submit Form Handler
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!localName || !description) return;
@@ -95,7 +92,6 @@ export const VisitorContributionSection: React.FC = () => {
     setSubmissions([newSub, ...submissions]);
     setSubmitSuccess(true);
     
-    // Reset Form
     setLocalName('');
     setHindiName('');
     setCommonName('');
@@ -107,7 +103,6 @@ export const VisitorContributionSection: React.FC = () => {
     setTimeout(() => setSubmitSuccess(false), 4000);
   };
 
-  // Admin Approve Handler
   const handleApprove = (id: string) => {
     setSubmissions(prev =>
       prev.map(sub => sub.id === id ? { ...sub, status: 'approved' } : sub)
@@ -115,7 +110,6 @@ export const VisitorContributionSection: React.FC = () => {
     setEditingSubId(null);
   };
 
-  // Admin Reject Handler
   const handleReject = (id: string) => {
     setSubmissions(prev =>
       prev.map(sub => sub.id === id ? { ...sub, status: 'rejected' } : sub)
@@ -123,7 +117,6 @@ export const VisitorContributionSection: React.FC = () => {
     setEditingSubId(null);
   };
 
-  // Admin Update Content (Fix Grammar / Typos)
   const handleAdminUpdate = (id: string, updatedFields: Partial<VisitorSubmission>) => {
     setSubmissions(prev =>
       prev.map(sub => sub.id === id ? { ...sub, ...updatedFields } : sub)
@@ -134,33 +127,32 @@ export const VisitorContributionSection: React.FC = () => {
   const approvedSubmissions = submissions.filter(s => s.status === 'approved');
 
   return (
-    <section className="py-12 bg-stone-950 text-amber-50 min-h-screen">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+    <section className="py-16 bg-[#F5F1E8] text-[#333333] min-h-screen">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
         
         {/* Title Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-3">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-900/60 border border-emerald-600/40 text-emerald-300 text-xs font-bold shadow-lg">
-            <User className="w-4 h-4 text-emerald-400" />
+        <div className="text-center max-w-3xl mx-auto space-y-4">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#FAF8F3] border border-[#E8D8B5] text-[#556B2F] text-xs font-nav font-semibold shadow-sm">
+            <User className="w-4 h-4 text-[#6B8E23]" />
             <span>Community Flora Contributions</span>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-amber-100">
+          <h2 className="text-3xl sm:text-5xl font-serif-heading font-bold text-[#4A3B2A]">
             Contribute Native Flora Photo & Details
           </h2>
-          <p className="text-sm text-amber-300/80 leading-relaxed">
+          <p className="text-base font-sans text-[#333333]/80 leading-relaxed">
             Visitors can submit photographs and information about Thar trees, shrubs, plants, and vegetables. Submissions are reviewed & edited for grammar by the Admin before being published live!
           </p>
 
           {/* Navigation & Admin Toggle Ribbon */}
-          <div className="flex items-center justify-between pt-4 border-t border-amber-800/40 flex-wrap gap-4">
+          <div className="flex items-center justify-between pt-4 border-t border-[#E8D8B5] flex-wrap gap-4">
             
-            {/* 3 Main Tabs */}
             <div className="flex items-center gap-2">
               <button
                 onClick={() => setActiveTab('submit')}
-                className={`px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${
+                className={`px-4 py-2.5 rounded-xl text-xs font-nav font-medium transition-all flex items-center gap-2 ${
                   activeTab === 'submit'
-                    ? 'bg-amber-500 text-amber-950 shadow-lg scale-105'
-                    : 'bg-stone-900 text-amber-200 hover:bg-amber-900/40 border border-amber-800/40'
+                    ? 'bg-[#B65A3C] text-white shadow-md font-semibold'
+                    : 'bg-[#FAF8F3] text-[#4A3B2A] hover:bg-[#E8D8B5]/40 border border-[#E8D8B5]'
                 }`}
               >
                 <PlusCircle className="w-4 h-4" />
@@ -169,10 +161,10 @@ export const VisitorContributionSection: React.FC = () => {
 
               <button
                 onClick={() => setActiveTab('admin')}
-                className={`px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${
+                className={`px-4 py-2.5 rounded-xl text-xs font-nav font-medium transition-all flex items-center gap-2 ${
                   activeTab === 'admin'
-                    ? 'bg-emerald-600 text-white shadow-lg scale-105'
-                    : 'bg-stone-900 text-amber-200 hover:bg-amber-900/40 border border-amber-800/40'
+                    ? 'bg-[#556B2F] text-white shadow-md font-semibold'
+                    : 'bg-[#FAF8F3] text-[#4A3B2A] hover:bg-[#E8D8B5]/40 border border-[#E8D8B5]'
                 }`}
               >
                 <ShieldCheck className="w-4 h-4" />
@@ -181,10 +173,10 @@ export const VisitorContributionSection: React.FC = () => {
 
               <button
                 onClick={() => setActiveTab('approved')}
-                className={`px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${
+                className={`px-4 py-2.5 rounded-xl text-xs font-nav font-medium transition-all flex items-center gap-2 ${
                   activeTab === 'approved'
-                    ? 'bg-amber-500 text-amber-950 shadow-lg scale-105'
-                    : 'bg-stone-900 text-amber-200 hover:bg-amber-900/40 border border-amber-800/40'
+                    ? 'bg-[#556B2F] text-white shadow-md font-semibold'
+                    : 'bg-[#FAF8F3] text-[#4A3B2A] hover:bg-[#E8D8B5]/40 border border-[#E8D8B5]'
                 }`}
               >
                 <CheckCircle2 className="w-4 h-4" />
@@ -193,15 +185,15 @@ export const VisitorContributionSection: React.FC = () => {
             </div>
 
             {/* Admin Toggle Switch */}
-            <div className="flex items-center gap-2 bg-stone-900 px-3 py-1.5 rounded-xl border border-amber-700/40 text-xs">
-              <span className="text-amber-300 font-semibold flex items-center gap-1">
-                {isAdminMode ? <Unlock className="w-4 h-4 text-emerald-400" /> : <Lock className="w-4 h-4 text-amber-400" />}
+            <div className="flex items-center gap-2 bg-[#FAF8F3] px-3 py-2 rounded-xl border border-[#E8D8B5] text-xs font-nav">
+              <span className="text-[#4A3B2A] font-semibold flex items-center gap-1">
+                {isAdminMode ? <Unlock className="w-4 h-4 text-[#556B2F]" /> : <Lock className="w-4 h-4 text-[#B65A3C]" />}
                 Admin Controls:
               </span>
               <button
                 onClick={() => setIsAdminMode(!isAdminMode)}
-                className={`px-3 py-1 rounded-lg text-[11px] font-extrabold transition-all ${
-                  isAdminMode ? 'bg-emerald-600 text-white' : 'bg-amber-900 text-amber-300'
+                className={`px-3 py-1 rounded-lg text-[11px] font-bold transition-all ${
+                  isAdminMode ? 'bg-[#556B2F] text-white' : 'bg-[#E8D8B5] text-[#4A3B2A]'
                 }`}
               >
                 {isAdminMode ? 'ENABLED (Admin)' : 'DISABLED'}
@@ -211,38 +203,37 @@ export const VisitorContributionSection: React.FC = () => {
           </div>
         </div>
 
-        {/* ==================== TAB 1: VISITOR SUBMISSION FORM ==================== */}
+        {/* TAB 1: VISITOR SUBMISSION FORM */}
         {activeTab === 'submit' && (
-          <div className="max-w-3xl mx-auto bg-stone-900/90 rounded-3xl p-6 sm:p-8 border border-amber-800/50 shadow-2xl space-y-6">
-            <div className="border-b border-amber-800/40 pb-4">
-              <h3 className="text-2xl font-extrabold text-amber-100 flex items-center gap-2">
-                <PlusCircle className="w-6 h-6 text-amber-400" /> Visitor Contribution Form
+          <div className="max-w-3xl mx-auto bg-[#FAF8F3] rounded-3xl p-6 sm:p-10 border border-[#E8D8B5] premium-shadow space-y-6">
+            <div className="border-b border-[#E8D8B5] pb-4">
+              <h3 className="text-3xl font-serif-heading font-bold text-[#4A3B2A] flex items-center gap-2">
+                <PlusCircle className="w-6 h-6 text-[#B65A3C]" /> Visitor Contribution Form
               </h3>
-              <p className="text-xs text-amber-300/80">Submit your observation of a native tree, shrub, plant, or traditional vegetable.</p>
+              <p className="text-xs font-sans text-[#333333]/80">Submit your observation of a native tree, shrub, plant, or traditional vegetable.</p>
             </div>
 
             {submitSuccess && (
-              <div className="p-4 rounded-2xl bg-emerald-950 border border-emerald-500/60 text-emerald-200 text-sm font-bold flex items-center gap-3 animate-fadeIn">
-                <CheckCircle2 className="w-6 h-6 text-emerald-400" />
+              <div className="p-4 rounded-2xl bg-[#556B2F]/10 border border-[#556B2F] text-[#556B2F] text-sm font-nav font-semibold flex items-center gap-3 animate-fadeIn">
+                <CheckCircle2 className="w-6 h-6 text-[#556B2F]" />
                 <span>Thank you! Your contribution has been submitted and queued for Admin review & approval.</span>
               </div>
             )}
 
-            <form onSubmit={handleSubmit} className="space-y-4 text-xs">
+            <form onSubmit={handleSubmit} className="space-y-4 text-xs font-sans">
               
-              {/* Category Selector */}
-              <div className="space-y-1">
-                <label className="font-bold text-amber-300">Category:</label>
+              <div className="space-y-1.5">
+                <label className="font-nav font-semibold text-[#4A3B2A]">Category:</label>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                   {(['Tree', 'Shrub', 'Grass', 'Vegetable'] as PlantCategory[]).map((cat) => (
                     <button
                       type="button"
                       key={cat}
                       onClick={() => setCategory(cat)}
-                      className={`py-2.5 px-3 rounded-xl font-bold border text-xs transition-all ${
+                      className={`py-3 px-3 rounded-xl font-nav font-medium border text-xs transition-all ${
                         category === cat
-                          ? 'bg-amber-500 text-amber-950 border-amber-400 shadow-md'
-                          : 'bg-stone-950 text-amber-200 border-amber-800/40 hover:bg-amber-950'
+                          ? 'bg-[#556B2F] text-white border-[#556B2F] shadow-sm font-semibold'
+                          : 'bg-[#F5F1E8] text-[#4A3B2A] border-[#E8D8B5] hover:bg-[#E8D8B5]/40'
                       }`}
                     >
                       {cat === 'Tree' && '🌳 Tree'}
@@ -254,62 +245,60 @@ export const VisitorContributionSection: React.FC = () => {
                 </div>
               </div>
 
-              {/* Plant Names Grid */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1">
-                  <label className="font-bold text-amber-300">Local Name (Desi Name) *:</label>
+                  <label className="font-nav font-semibold text-[#4A3B2A]">Local Name (Desi Name) *:</label>
                   <input
                     type="text"
                     required
                     value={localName}
                     onChange={(e) => setLocalName(e.target.value)}
                     placeholder="e.g. Khejri, Ker, Sangri, Bordi..."
-                    className="w-full p-3 rounded-xl bg-stone-950 border border-amber-800/50 text-amber-100 placeholder-amber-400/40 focus:outline-none focus:border-amber-400"
+                    className="w-full p-3 rounded-xl bg-[#F5F1E8] border border-[#E8D8B5] text-[#4A3B2A] placeholder-[#333333]/40 focus:outline-none focus:border-[#556B2F]"
                   />
                 </div>
 
                 <div className="space-y-1">
-                  <label className="font-bold text-amber-300">Hindi Name:</label>
+                  <label className="font-nav font-semibold text-[#4A3B2A]">Hindi Name:</label>
                   <input
                     type="text"
                     value={hindiName}
                     onChange={(e) => setHindiName(e.target.value)}
                     placeholder="e.g. खेजड़ी, केर, सांगरी..."
-                    className="w-full p-3 rounded-xl bg-stone-950 border border-amber-800/50 text-amber-100 placeholder-amber-400/40 focus:outline-none focus:border-amber-400"
+                    className="w-full p-3 rounded-xl bg-[#F5F1E8] border border-[#E8D8B5] text-[#4A3B2A] placeholder-[#333333]/40 focus:outline-none focus:border-[#556B2F]"
                   />
                 </div>
 
                 <div className="space-y-1">
-                  <label className="font-bold text-amber-300">Scientific Name (Botanical Name):</label>
+                  <label className="font-nav font-semibold text-[#4A3B2A]">Scientific Name (Botanical Name):</label>
                   <input
                     type="text"
                     value={scientificName}
                     onChange={(e) => setScientificName(e.target.value)}
                     placeholder="e.g. Prosopis cineraria"
-                    className="w-full p-3 rounded-xl bg-stone-950 border border-amber-800/50 text-amber-100 italic placeholder-amber-400/40 focus:outline-none focus:border-amber-400"
+                    className="w-full p-3 rounded-xl bg-[#F5F1E8] border border-[#E8D8B5] text-[#4A3B2A] italic placeholder-[#333333]/40 focus:outline-none focus:border-[#556B2F]"
                   />
                 </div>
 
                 <div className="space-y-1">
-                  <label className="font-bold text-amber-300">English Name:</label>
+                  <label className="font-nav font-semibold text-[#4A3B2A]">English Name:</label>
                   <input
                     type="text"
                     value={commonName}
                     onChange={(e) => setCommonName(e.target.value)}
                     placeholder="e.g. Wonder Tree of Thar"
-                    className="w-full p-3 rounded-xl bg-stone-950 border border-amber-800/50 text-amber-100 placeholder-amber-400/40 focus:outline-none focus:border-amber-400"
+                    className="w-full p-3 rounded-xl bg-[#F5F1E8] border border-[#E8D8B5] text-[#4A3B2A] placeholder-[#333333]/40 focus:outline-none focus:border-[#556B2F]"
                   />
                 </div>
               </div>
 
-              {/* District & Contributor Name */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1">
-                  <label className="font-bold text-amber-300">District Found In:</label>
+                  <label className="font-nav font-semibold text-[#4A3B2A]">District Found In:</label>
                   <select
                     value={district}
                     onChange={(e) => setDistrict(e.target.value)}
-                    className="w-full p-3 rounded-xl bg-stone-950 border border-amber-800/50 text-amber-100 focus:outline-none focus:border-amber-400"
+                    className="w-full p-3 rounded-xl bg-[#F5F1E8] border border-[#E8D8B5] text-[#4A3B2A] focus:outline-none focus:border-[#556B2F]"
                   >
                     <option value="jaisalmer">Jaisalmer (जैसलमेर)</option>
                     <option value="barmer">Barmer (बाड़मेर)</option>
@@ -323,62 +312,59 @@ export const VisitorContributionSection: React.FC = () => {
                 </div>
 
                 <div className="space-y-1">
-                  <label className="font-bold text-amber-300">Your Name (Contributor):</label>
+                  <label className="font-nav font-semibold text-[#4A3B2A]">Your Name (Contributor):</label>
                   <input
                     type="text"
                     value={contributorName}
                     onChange={(e) => setContributorName(e.target.value)}
                     placeholder="e.g. Ashok Kumar"
-                    className="w-full p-3 rounded-xl bg-stone-950 border border-amber-800/50 text-amber-100 placeholder-amber-400/40 focus:outline-none focus:border-amber-400"
+                    className="w-full p-3 rounded-xl bg-[#F5F1E8] border border-[#E8D8B5] text-[#4A3B2A] placeholder-[#333333]/40 focus:outline-none focus:border-[#556B2F]"
                   />
                 </div>
               </div>
 
-              {/* Plant Photo Upload / URL */}
               <div className="space-y-2">
-                <label className="font-bold text-amber-300 flex items-center gap-2">
-                  <ImageIcon className="w-4 h-4 text-amber-400" /> Plant Photograph:
+                <label className="font-nav font-semibold text-[#4A3B2A] flex items-center gap-2">
+                  <ImageIcon className="w-4 h-4 text-[#556B2F]" /> Plant Photograph:
                 </label>
                 <div className="flex flex-col sm:flex-row gap-3 items-center">
-                  <label className="w-full sm:w-auto px-4 py-3 rounded-xl bg-amber-900/60 hover:bg-amber-800/60 border border-amber-700/50 text-amber-200 font-bold cursor-pointer transition-colors flex items-center justify-center gap-2">
-                    <Upload className="w-4 h-4" />
+                  <label className="w-full sm:w-auto px-4 py-3 rounded-xl bg-[#F5F1E8] hover:bg-[#E8D8B5]/50 border border-[#E8D8B5] text-[#4A3B2A] font-nav font-semibold cursor-pointer transition-colors flex items-center justify-center gap-2">
+                    <Upload className="w-4 h-4 text-[#556B2F]" />
                     <span>Upload Image File</span>
                     <input type="file" accept="image/*" onChange={handlePhotoUpload} className="hidden" />
                   </label>
-                  <span className="text-amber-400/60 text-xs">or paste image URL below:</span>
+                  <span className="text-[#333333]/60 text-xs">or paste image URL below:</span>
                   <input
                     type="text"
                     value={imageUrl}
                     onChange={(e) => setImageUrl(e.target.value)}
                     placeholder="https://example.com/photo.jpg"
-                    className="flex-1 p-3 rounded-xl bg-stone-950 border border-amber-800/50 text-amber-100 placeholder-amber-400/40 focus:outline-none focus:border-amber-400"
+                    className="flex-1 p-3 rounded-xl bg-[#F5F1E8] border border-[#E8D8B5] text-[#4A3B2A] placeholder-[#333333]/40 focus:outline-none focus:border-[#556B2F]"
                   />
                 </div>
 
                 {imageUrl && (
-                  <div className="h-40 w-full max-w-sm rounded-xl overflow-hidden bg-stone-950 border border-amber-700/50 mt-2">
+                  <div className="h-40 w-full max-w-sm rounded-xl overflow-hidden bg-[#E8D8B5]/30 border border-[#E8D8B5] mt-2">
                     <img src={imageUrl} alt="Preview" className="w-full h-full object-cover" />
                   </div>
                 )}
               </div>
 
-              {/* Description */}
               <div className="space-y-1">
-                <label className="font-bold text-amber-300">Plant Details & Observation Description *:</label>
+                <label className="font-nav font-semibold text-[#4A3B2A]">Plant Details & Observation Description *:</label>
                 <textarea
                   rows={4}
                   required
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                   placeholder="Describe where you found this plant, its leaves, flowers, fruits, or traditional uses..."
-                  className="w-full p-3 rounded-xl bg-stone-950 border border-amber-800/50 text-amber-100 placeholder-amber-400/40 focus:outline-none focus:border-amber-400"
+                  className="w-full p-3 rounded-xl bg-[#F5F1E8] border border-[#E8D8B5] text-[#4A3B2A] placeholder-[#333333]/40 focus:outline-none focus:border-[#556B2F]"
                 />
               </div>
 
-              {/* Submit Button */}
               <button
                 type="submit"
-                className="w-full py-4 rounded-2xl bg-amber-500 hover:bg-amber-400 text-amber-950 font-extrabold text-sm shadow-xl transition-all"
+                className="w-full py-4 rounded-2xl bg-[#B65A3C] hover:bg-[#a04b30] text-white font-nav font-semibold text-sm shadow-xl transition-all"
               >
                 Submit Contribution for Admin Review
               </button>
@@ -387,24 +373,24 @@ export const VisitorContributionSection: React.FC = () => {
           </div>
         )}
 
-        {/* ==================== TAB 2: ADMIN APPROVAL & EDITING PORTAL ==================== */}
+        {/* TAB 2: ADMIN APPROVAL & EDITING PORTAL */}
         {activeTab === 'admin' && (
           <div className="space-y-6">
-            <div className="bg-stone-900/90 rounded-3xl p-6 border border-emerald-700/50 shadow-2xl flex items-center justify-between flex-wrap gap-4">
+            <div className="bg-[#FAF8F3] rounded-3xl p-6 sm:p-8 border border-[#E8D8B5] premium-shadow flex items-center justify-between flex-wrap gap-4">
               <div>
-                <h3 className="text-2xl font-extrabold text-emerald-300 flex items-center gap-2">
-                  <ShieldCheck className="w-6 h-6 text-emerald-400" /> Admin Approval & Grammar Editing Dashboard
+                <h3 className="text-3xl font-serif-heading font-bold text-[#4A3B2A] flex items-center gap-2">
+                  <ShieldCheck className="w-6 h-6 text-[#556B2F]" /> Admin Approval & Grammar Editing Dashboard
                 </h3>
-                <p className="text-xs text-amber-200/80">Review visitor submissions, edit text for grammar & scientific accuracy, and approve for live display.</p>
+                <p className="text-xs font-sans text-[#333333]/80">Review visitor submissions, edit text for grammar & scientific accuracy, and approve for live display.</p>
               </div>
 
-              <span className="px-4 py-1.5 rounded-full bg-emerald-950 border border-emerald-500/40 text-emerald-300 text-xs font-extrabold">
+              <span className="px-4 py-1.5 rounded-full bg-[#556B2F] text-white text-xs font-nav font-semibold">
                 {pendingSubmissions.length} Pending Approvals
               </span>
             </div>
 
             {pendingSubmissions.length === 0 ? (
-              <div className="p-12 text-center bg-stone-900/60 rounded-3xl border border-amber-800/30 text-amber-300 text-sm">
+              <div className="p-12 text-center bg-[#FAF8F3] rounded-3xl border border-[#E8D8B5] text-[#4A3B2A] text-sm font-sans">
                 🎉 All visitor submissions have been reviewed! No pending approvals.
               </div>
             ) : (
@@ -415,83 +401,78 @@ export const VisitorContributionSection: React.FC = () => {
                   return (
                     <div
                       key={sub.id}
-                      className="bg-stone-900 rounded-3xl border border-amber-700/50 p-6 shadow-2xl space-y-4 text-xs"
+                      className="bg-[#FAF8F3] rounded-3xl border border-[#E8D8B5] p-6 sm:p-8 premium-shadow space-y-4 text-xs font-sans"
                     >
                       <div className="flex flex-col sm:flex-row gap-6">
-                        {/* Image Preview */}
-                        <div className="w-full sm:w-56 h-48 rounded-2xl overflow-hidden bg-amber-950/60 shrink-0 border border-amber-800/40">
+                        <div className="w-full sm:w-56 h-48 rounded-2xl overflow-hidden bg-[#E8D8B5]/30 shrink-0 border border-[#E8D8B5]">
                           <img src={sub.imageUrl} alt={sub.localName} className="w-full h-full object-cover" />
                         </div>
 
-                        {/* Details / Admin Edit Form */}
                         <div className="flex-1 space-y-3">
                           <div className="flex items-center justify-between flex-wrap gap-2">
-                            <span className="px-3 py-1 rounded-full bg-amber-500 text-amber-950 font-extrabold text-[10px] uppercase">
+                            <span className="px-3 py-1 rounded-full bg-[#556B2F] text-white font-nav font-semibold text-[10px] uppercase">
                               {sub.category}
                             </span>
-                            <span className="text-amber-400 text-[11px]">Contributed by: <strong>{sub.contributorName}</strong> ({sub.submittedAt})</span>
+                            <span className="text-[#6B8E23] text-xs font-nav">Contributed by: <strong>{sub.contributorName}</strong> ({sub.submittedAt})</span>
                           </div>
 
                           {isEditing ? (
-                            /* Admin Inline Editing Form */
-                            <div className="space-y-3 p-4 rounded-2xl bg-amber-950/60 border border-amber-700/50">
-                              <h4 className="font-extrabold text-amber-300 flex items-center gap-1.5 text-xs">
-                                <Edit3 className="w-4 h-4 text-amber-400" /> Edit Visitor Content (Fix Grammar & Scientific Details):
+                            <div className="space-y-3 p-4 rounded-2xl bg-[#F5F1E8] border border-[#E8D8B5]">
+                              <h4 className="font-serif-heading font-bold text-[#4A3B2A] flex items-center gap-1.5 text-base">
+                                <Edit3 className="w-4 h-4 text-[#B65A3C]" /> Edit Visitor Content (Fix Grammar & Scientific Details):
                               </h4>
 
                               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                 <div>
-                                  <label className="font-bold text-amber-400 text-[11px]">Local Name:</label>
+                                  <label className="font-nav font-semibold text-[#4A3B2A]">Local Name:</label>
                                   <input
                                     type="text"
                                     value={sub.localName}
                                     onChange={(e) => handleAdminUpdate(sub.id, { localName: e.target.value })}
-                                    className="w-full p-2 rounded-xl bg-stone-900 border border-amber-700/50 text-amber-100"
+                                    className="w-full p-2.5 rounded-xl bg-[#FAF8F3] border border-[#E8D8B5] text-[#4A3B2A]"
                                   />
                                 </div>
 
                                 <div>
-                                  <label className="font-bold text-amber-400 text-[11px]">Scientific Name:</label>
+                                  <label className="font-nav font-semibold text-[#4A3B2A]">Scientific Name:</label>
                                   <input
                                     type="text"
                                     value={sub.scientificName}
                                     onChange={(e) => handleAdminUpdate(sub.id, { scientificName: e.target.value })}
-                                    className="w-full p-2 rounded-xl bg-stone-900 border border-amber-700/50 text-amber-100 italic"
+                                    className="w-full p-2.5 rounded-xl bg-[#FAF8F3] border border-[#E8D8B5] text-[#4A3B2A] italic"
                                   />
                                 </div>
                               </div>
 
                               <div>
-                                <label className="font-bold text-amber-400 text-[11px]">Edit Description (Grammar Correction):</label>
+                                <label className="font-nav font-semibold text-[#4A3B2A]">Edit Description (Grammar Correction):</label>
                                 <textarea
                                   rows={3}
                                   value={sub.description}
                                   onChange={(e) => handleAdminUpdate(sub.id, { description: e.target.value })}
-                                  className="w-full p-2.5 rounded-xl bg-stone-900 border border-amber-700/50 text-amber-100"
+                                  className="w-full p-2.5 rounded-xl bg-[#FAF8F3] border border-[#E8D8B5] text-[#4A3B2A]"
                                 />
                               </div>
 
                               <button
                                 onClick={() => setEditingSubId(null)}
-                                className="px-4 py-1.5 rounded-xl bg-emerald-600 text-white font-bold text-xs"
+                                className="px-4 py-2 rounded-xl bg-[#556B2F] text-white font-nav font-semibold text-xs"
                               >
                                 Save Edits
                               </button>
                             </div>
                           ) : (
-                            /* Read View */
                             <div className="space-y-2">
-                              <h4 className="text-xl font-extrabold text-amber-100">{sub.localName} ({sub.hindiName})</h4>
-                              <p className="font-bold text-amber-300 italic">{sub.scientificName}</p>
-                              <p className="text-amber-200/90 leading-relaxed">{sub.description}</p>
+                              <h4 className="text-2xl font-serif-heading font-bold text-[#4A3B2A]">{sub.localName} ({sub.hindiName})</h4>
+                              <p className="font-serif-heading text-lg text-[#B65A3C] italic">{sub.scientificName}</p>
+                              <p className="text-[#333333]/90 leading-relaxed">{sub.description}</p>
                             </div>
                           )}
 
-                          {/* Admin Action Buttons */}
-                          <div className="flex items-center gap-3 pt-3 border-t border-amber-800/40">
+                          <div className="flex items-center gap-3 pt-4 border-t border-[#E8D8B5]">
                             <button
                               onClick={() => handleApprove(sub.id)}
-                              className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold transition-all flex items-center gap-2 shadow-lg"
+                              className="px-5 py-2.5 rounded-xl bg-[#556B2F] hover:bg-[#465826] text-white font-nav font-semibold transition-all flex items-center gap-2 shadow-sm"
                             >
                               <CheckCircle2 className="w-4 h-4" />
                               <span>Approve & Publish Live</span>
@@ -499,17 +480,17 @@ export const VisitorContributionSection: React.FC = () => {
 
                             <button
                               onClick={() => setEditingSubId(isEditing ? null : sub.id)}
-                              className="px-4 py-2.5 rounded-xl bg-amber-900/60 hover:bg-amber-800/60 text-amber-200 font-bold border border-amber-700/50 transition-all flex items-center gap-2"
+                              className="px-4 py-2.5 rounded-xl bg-[#F5F1E8] hover:bg-[#E8D8B5]/50 text-[#4A3B2A] font-nav font-medium border border-[#E8D8B5] transition-all flex items-center gap-2"
                             >
-                              <Edit3 className="w-4 h-4 text-amber-400" />
+                              <Edit3 className="w-4 h-4 text-[#B65A3C]" />
                               <span>{isEditing ? 'Close Editor' : 'Edit Grammar & Content'}</span>
                             </button>
 
                             <button
                               onClick={() => handleReject(sub.id)}
-                              className="px-4 py-2.5 rounded-xl bg-red-950 hover:bg-red-900 text-red-200 font-bold border border-red-700/40 transition-all flex items-center gap-2 ml-auto"
+                              className="px-4 py-2.5 rounded-xl bg-[#B65A3C] hover:bg-[#a04b30] text-white font-nav font-medium transition-all flex items-center gap-2 ml-auto"
                             >
-                              <XCircle className="w-4 h-4 text-red-400" />
+                              <XCircle className="w-4 h-4" />
                               <span>Reject</span>
                             </button>
                           </div>
@@ -524,39 +505,39 @@ export const VisitorContributionSection: React.FC = () => {
           </div>
         )}
 
-        {/* ==================== TAB 3: APPROVED COMMUNITY FLORA ==================== */}
+        {/* TAB 3: APPROVED COMMUNITY FLORA */}
         {activeTab === 'approved' && (
           <div className="space-y-6">
-            <div className="pb-3 border-b border-amber-800/40 flex items-center justify-between">
-              <h3 className="text-2xl font-extrabold text-amber-100 flex items-center gap-2">
-                <CheckCircle2 className="w-6 h-6 text-emerald-400" /> Admin-Approved Community Flora ({approvedSubmissions.length})
+            <div className="pb-3 border-b border-[#E8D8B5] flex items-center justify-between">
+              <h3 className="text-3xl font-serif-heading font-bold text-[#4A3B2A] flex items-center gap-2">
+                <CheckCircle2 className="w-6 h-6 text-[#556B2F]" /> Admin-Approved Community Flora ({approvedSubmissions.length})
               </h3>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {approvedSubmissions.map((sub) => (
                 <div
                   key={sub.id}
-                  className="bg-stone-900 rounded-3xl border border-emerald-700/50 overflow-hidden shadow-xl flex flex-col justify-between"
+                  className="bg-[#FAF8F3] rounded-3xl border border-[#E8D8B5] overflow-hidden premium-shadow flex flex-col justify-between"
                 >
                   <div>
-                    <div className="relative h-48 w-full bg-amber-950/60">
+                    <div className="relative h-48 w-full bg-[#E8D8B5]/30">
                       <img src={sub.imageUrl} alt={sub.localName} className="w-full h-full object-cover" />
-                      <div className="absolute top-3 right-3 px-3 py-1 rounded-full bg-emerald-600 text-white text-[10px] font-extrabold uppercase">
+                      <div className="absolute top-3 right-3 px-3 py-1 rounded-full bg-[#556B2F] text-white text-[10px] font-nav font-semibold uppercase">
                         Admin Verified
                       </div>
                     </div>
 
-                    <div className="p-5 space-y-2 text-xs">
-                      <h4 className="font-extrabold text-base text-amber-100">{sub.localName} ({sub.hindiName})</h4>
-                      <p className="font-bold text-amber-300 italic">{sub.scientificName}</p>
-                      <p className="text-amber-200/80 leading-relaxed">{sub.description}</p>
+                    <div className="p-6 space-y-2 font-sans text-xs">
+                      <h4 className="font-serif-heading font-bold text-xl text-[#4A3B2A]">{sub.localName} ({sub.hindiName})</h4>
+                      <p className="font-serif-heading text-base text-[#B65A3C] italic">{sub.scientificName}</p>
+                      <p className="text-[#333333]/80 leading-relaxed">{sub.description}</p>
                     </div>
                   </div>
 
-                  <div className="px-5 py-3 bg-amber-950/50 border-t border-amber-800/30 text-[11px] text-amber-400 font-bold flex items-center justify-between">
+                  <div className="px-6 py-3.5 bg-[#F5F1E8] border-t border-[#E8D8B5] text-xs font-nav font-medium text-[#556B2F] flex items-center justify-between">
                     <span>Contributed by: {sub.contributorName}</span>
-                    <span className="text-emerald-400 font-bold">Approved</span>
+                    <span className="text-[#556B2F] font-semibold">Approved</span>
                   </div>
                 </div>
               ))}

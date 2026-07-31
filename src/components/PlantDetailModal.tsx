@@ -12,21 +12,21 @@ export const PlantDetailModal: React.FC<PlantDetailModalProps> = ({ plant, onClo
   if (!plant) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fadeIn overflow-y-auto">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#4A3B2A]/80 backdrop-blur-md animate-fadeIn overflow-y-auto">
       
       {/* Modal Card */}
-      <div className="relative w-full max-w-2xl bg-stone-900 rounded-3xl border border-amber-700/60 shadow-2xl overflow-hidden text-amber-50 my-8">
+      <div className="relative w-full max-w-2xl bg-[#FAF8F3] rounded-3xl border border-[#E8D8B5] premium-shadow-lg overflow-hidden text-[#333333] my-8">
         
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 z-20 p-2.5 rounded-full bg-black/60 hover:bg-amber-600 text-amber-100 transition-colors border border-amber-500/40"
+          className="absolute top-4 right-4 z-20 p-2.5 rounded-full bg-[#FAF8F3]/90 text-[#4A3B2A] hover:bg-[#B65A3C] hover:text-white transition-colors border border-[#E8D8B5] shadow-sm backdrop-blur-sm"
         >
           <X className="w-5 h-5" />
         </button>
 
         {/* Plant Image Header */}
-        <div className="relative h-64 sm:h-72 w-full bg-amber-950/60">
+        <div className="relative h-64 sm:h-72 w-full bg-[#E8D8B5]/40">
           <img
             src={plant.imageUrl}
             alt={plant.scientificName}
@@ -35,57 +35,57 @@ export const PlantDetailModal: React.FC<PlantDetailModalProps> = ({ plant, onClo
             }}
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-stone-900 via-stone-900/40 to-transparent flex items-end p-6">
+          <div className="absolute inset-0 bg-gradient-to-t from-[#FAF8F3] via-[#FAF8F3]/40 to-transparent flex items-end p-6">
             <div>
-              <span className="px-3 py-1 rounded-full bg-amber-500 text-amber-950 font-extrabold text-xs tracking-wider uppercase mb-2 inline-block">
+              <span className="px-3 py-1 rounded-full bg-[#556B2F] text-white font-nav font-semibold text-xs uppercase tracking-wider mb-2 inline-block shadow-sm">
                 {plant.category}
               </span>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-amber-100 italic">{plant.scientificName}</h2>
-              <p className="text-base font-bold text-amber-300">{plant.localName} ({plant.hindiName})</p>
+              <h2 className="text-3xl sm:text-4xl font-serif-heading font-bold text-[#4A3B2A] italic">{plant.scientificName}</h2>
+              <p className="text-base font-nav font-semibold text-[#B65A3C]">{plant.localName} ({plant.hindiName}) — <em>{plant.commonName}</em></p>
             </div>
           </div>
         </div>
 
         {/* Modal Body - Simple & Direct Text */}
-        <div className="p-6 space-y-6 text-xs sm:text-sm">
+        <div className="p-6 sm:p-8 space-y-6 text-xs sm:text-sm font-sans">
           
           {/* Simple Description */}
-          <div className="p-4 rounded-2xl bg-amber-950/50 border border-amber-800/40 space-y-1">
-            <h4 className="font-bold text-amber-400 text-xs uppercase tracking-wider">Plant Overview:</h4>
-            <p className="text-amber-100/90 leading-relaxed text-sm">{plant.description}</p>
+          <div className="p-4 sm:p-5 rounded-2xl bg-[#F5F1E8] border border-[#E8D8B5] space-y-1.5">
+            <h4 className="font-serif-heading font-bold text-[#4A3B2A] text-sm uppercase tracking-wider">Plant Overview:</h4>
+            <p className="text-[#333333]/90 leading-relaxed">{plant.description}</p>
           </div>
 
           {/* Key Quick Stats */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-            <div className="p-3.5 rounded-2xl bg-amber-950/40 border border-amber-800/40 text-center space-y-1">
-              <Droplets className="w-5 h-5 text-blue-400 mx-auto" />
-              <span className="text-amber-400/80 text-[11px] block">Rainfall Needed</span>
-              <span className="font-bold text-amber-100">{plant.rainfallMinMm} - {plant.rainfallMaxMm} mm</span>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 font-sans">
+            <div className="p-4 rounded-2xl bg-[#F5F1E8] border border-[#E8D8B5] text-center space-y-1">
+              <Droplets className="w-5 h-5 text-[#556B2F] mx-auto" />
+              <span className="text-[#333333]/70 text-[11px] font-nav block">Rainfall Needed</span>
+              <span className="font-nav font-bold text-[#4A3B2A] text-xs sm:text-sm">{plant.rainfallMinMm} - {plant.rainfallMaxMm} mm</span>
             </div>
 
-            <div className="p-3.5 rounded-2xl bg-amber-950/40 border border-amber-800/40 text-center space-y-1">
-              <Leaf className="w-5 h-5 text-emerald-400 mx-auto" />
-              <span className="text-amber-400/80 text-[11px] block">Plant Family</span>
-              <span className="font-bold text-amber-100">{plant.family}</span>
+            <div className="p-4 rounded-2xl bg-[#F5F1E8] border border-[#E8D8B5] text-center space-y-1">
+              <Leaf className="w-5 h-5 text-[#6B8E23] mx-auto" />
+              <span className="text-[#333333]/70 text-[11px] font-nav block">Plant Family</span>
+              <span className="font-nav font-bold text-[#4A3B2A] text-xs sm:text-sm">{plant.family}</span>
             </div>
 
-            <div className="p-3.5 rounded-2xl bg-amber-950/40 border border-amber-800/40 text-center space-y-1 col-span-2 sm:col-span-1">
-              <CheckCircle2 className="w-5 h-5 text-amber-400 mx-auto" />
-              <span className="text-amber-400/80 text-[11px] block">Status</span>
-              <span className="font-bold text-amber-100">{plant.conservationStatus}</span>
+            <div className="p-4 rounded-2xl bg-[#F5F1E8] border border-[#E8D8B5] text-center space-y-1 col-span-2 sm:col-span-1">
+              <CheckCircle2 className="w-5 h-5 text-[#B65A3C] mx-auto" />
+              <span className="text-[#333333]/70 text-[11px] font-nav block">Status</span>
+              <span className="font-nav font-bold text-[#4A3B2A] text-xs sm:text-sm">{plant.conservationStatus}</span>
             </div>
           </div>
 
           {/* Traditional Uses */}
           {plant.traditionalUses && plant.traditionalUses.length > 0 && (
-            <div className="space-y-2">
-              <h4 className="font-extrabold text-amber-300 text-xs uppercase tracking-wider flex items-center gap-1.5">
-                <HeartHandshake className="w-4 h-4 text-amber-400" /> Traditional Uses & Benefits:
+            <div className="space-y-2.5">
+              <h4 className="font-serif-heading font-bold text-[#4A3B2A] text-base flex items-center gap-1.5">
+                <HeartHandshake className="w-4 h-4 text-[#B65A3C]" /> Traditional Uses & Benefits:
               </h4>
-              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-sans">
                 {plant.traditionalUses.map((use, idx) => (
-                  <li key={idx} className="p-2.5 rounded-xl bg-amber-950/30 border border-amber-800/30 text-amber-200/90 flex items-start gap-2">
-                    <span className="text-amber-400">•</span>
+                  <li key={idx} className="p-3 rounded-xl bg-[#F5F1E8] border border-[#E8D8B5] text-[#333333]/90 flex items-start gap-2">
+                    <span className="text-[#556B2F] font-bold">•</span>
                     <span>{use}</span>
                   </li>
                 ))}
@@ -94,13 +94,13 @@ export const PlantDetailModal: React.FC<PlantDetailModalProps> = ({ plant, onClo
           )}
 
           {/* Districts Found In */}
-          <div className="space-y-2 pt-2 border-t border-amber-800/30">
-            <h4 className="font-extrabold text-amber-300 text-xs uppercase tracking-wider flex items-center gap-1.5">
-              <MapPin className="w-4 h-4 text-amber-400" /> Found In Districts:
+          <div className="space-y-2 pt-2 border-t border-[#E8D8B5]">
+            <h4 className="font-serif-heading font-bold text-[#4A3B2A] text-base flex items-center gap-1.5">
+              <MapPin className="w-4 h-4 text-[#556B2F]" /> Found In Districts:
             </h4>
             <div className="flex flex-wrap gap-1.5">
               {plant.districts.map((dist, idx) => (
-                <span key={idx} className="px-3 py-1 rounded-full bg-amber-900/60 border border-amber-700/40 text-amber-200 text-xs font-bold capitalize">
+                <span key={idx} className="px-3 py-1 rounded-full bg-[#E8D8B5]/50 border border-[#E8D8B5] text-[#4A3B2A] text-xs font-nav font-semibold capitalize">
                   {dist}
                 </span>
               ))}

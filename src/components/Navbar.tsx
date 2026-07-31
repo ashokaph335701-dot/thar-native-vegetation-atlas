@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Leaf, Map, MessageSquare, BookOpen, Image as ImageIcon, Search, Menu, X, Sparkles, Home, UserCheck } from 'lucide-react';
+import { Leaf, Map, BookOpen, Image as ImageIcon, Search, Menu, X, Home, UserCheck, Sparkles } from 'lucide-react';
 
 interface NavbarProps {
   activeTab: string;
@@ -20,27 +20,29 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab, onOpenS
   ];
 
   return (
-    <header className="sticky top-0 z-50 bg-stone-900/95 backdrop-blur-md border-b border-amber-800/40 text-amber-50 shadow-xl">
+    <header className="sticky top-0 z-50 bg-[#FAF8F3]/95 backdrop-blur-md border-b border-[#E8D8B5] text-[#333333] shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           
-          {/* Logo */}
+          {/* Brand Logo */}
           <div 
-            className="flex items-center gap-3 cursor-pointer group"
+            className="flex items-center gap-3.5 cursor-pointer group"
             onClick={() => setActiveTab('hero')}
           >
-            <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-amber-500 to-emerald-600 flex items-center justify-center shadow-lg shadow-amber-900/40 group-hover:scale-105 transition-transform duration-300 border border-amber-400/30">
-              <Leaf className="w-6 h-6 text-amber-100" />
+            <div className="w-11 h-11 rounded-2xl bg-[#556B2F] flex items-center justify-center shadow-md group-hover:bg-[#B65A3C] transition-colors duration-300">
+              <Leaf className="w-6 h-6 text-[#FAF8F3]" />
             </div>
             <div>
-              <span className="text-xl font-extrabold tracking-tight bg-gradient-to-r from-amber-200 via-amber-100 to-emerald-200 bg-clip-text text-transparent">
+              <span className="text-2xl font-serif-heading font-bold tracking-tight text-[#4A3B2A] block leading-none">
                 Thar Native Vegetation
               </span>
-              <p className="text-xs text-amber-300/80 font-medium">Digital Knowledge Platform</p>
+              <span className="text-[11px] font-nav font-medium tracking-wider text-[#6B8E23] uppercase mt-1 block">
+                Digital Knowledge Platform
+              </span>
             </div>
           </div>
 
-          {/* Clean Top Navigation Tabs */}
+          {/* Navigation Items */}
           <nav className="hidden lg:flex items-center gap-1.5">
             {navItems.map((item) => {
               const Icon = item.icon;
@@ -49,13 +51,13 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab, onOpenS
                 <button
                   key={item.id}
                   onClick={() => setActiveTab(item.id)}
-                  className={`flex items-center gap-2 px-3.5 py-2.5 rounded-xl font-bold text-xs transition-all whitespace-nowrap ${
+                  className={`flex items-center gap-2 px-3.5 py-2 rounded-xl font-nav font-medium text-xs tracking-wide transition-all whitespace-nowrap ${
                     isActive
-                      ? 'bg-amber-500 text-amber-950 shadow-lg scale-105'
-                      : 'text-amber-200/90 hover:text-amber-100 hover:bg-amber-900/40 border border-amber-800/30'
+                      ? 'bg-[#556B2F] text-white shadow-md font-semibold'
+                      : 'text-[#4A3B2A] hover:text-[#B65A3C] hover:bg-[#E8D8B5]/40'
                   }`}
                 >
-                  <Icon className={`w-4 h-4 ${isActive ? 'text-amber-950' : 'text-amber-400'}`} />
+                  <Icon className={`w-4 h-4 ${isActive ? 'text-white' : 'text-[#6B8E23]'}`} />
                   <span>{item.label}</span>
                 </button>
               );
@@ -66,18 +68,18 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab, onOpenS
           <div className="hidden sm:flex items-center gap-3">
             <button
               onClick={onOpenSearch}
-              className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-amber-950/80 hover:bg-amber-900/60 border border-amber-700/50 text-amber-200 text-xs font-bold transition-all"
+              className="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#F5F1E8] hover:bg-[#E8D8B5] border border-[#E8D8B5] text-[#4A3B2A] text-xs font-nav font-medium transition-colors"
             >
-              <Search className="w-4 h-4 text-amber-400" />
+              <Search className="w-4 h-4 text-[#556B2F]" />
               <span>Search Plants...</span>
             </button>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Menu Toggle */}
           <div className="flex lg:hidden items-center gap-2">
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="p-2.5 rounded-xl bg-amber-950 text-amber-200 border border-amber-700/50"
+              className="p-2.5 rounded-xl bg-[#F5F1E8] text-[#4A3B2A] border border-[#E8D8B5]"
             >
               {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -87,7 +89,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab, onOpenS
 
         {/* Mobile Navigation Drawer */}
         {isMobileMenuOpen && (
-          <div className="lg:hidden py-4 border-t border-amber-800/40 space-y-2">
+          <div className="lg:hidden py-4 border-t border-[#E8D8B5] space-y-1.5 bg-[#FAF8F3]">
             {navItems.map((item) => {
               const Icon = item.icon;
               const isActive = activeTab === item.id;
@@ -98,14 +100,14 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab, onOpenS
                     setActiveTab(item.id);
                     setIsMobileMenuOpen(false);
                   }}
-                  className={`w-full flex items-center justify-between px-4 py-3 rounded-2xl font-bold text-sm ${
+                  className={`w-full flex items-center justify-between px-4 py-3 rounded-xl font-nav font-medium text-sm ${
                     isActive
-                      ? 'bg-amber-500 text-amber-950'
-                      : 'text-amber-200/90 hover:bg-amber-950'
+                      ? 'bg-[#556B2F] text-white font-semibold'
+                      : 'text-[#4A3B2A] hover:bg-[#F5F1E8]'
                   }`}
                 >
                   <div className="flex items-center gap-3">
-                    <Icon className="w-5 h-5 text-amber-400" />
+                    <Icon className={`w-5 h-5 ${isActive ? 'text-white' : 'text-[#6B8E23]'}`} />
                     <span>{item.label}</span>
                   </div>
                 </button>
