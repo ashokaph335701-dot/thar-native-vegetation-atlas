@@ -693,11 +693,11 @@ export const plantDatabase: PlantSpecies[] = [
     scientificName: 'Capparis decidua',
     hindiName: 'केर (सब्जी)',
     localName: 'Ker Berry Vegetable',
-    commonName: 'Desert Caper Vegetable',
+    commonName: 'Desert Caper Berry',
     family: 'Capparaceae',
     category: 'Vegetable',
     taxonomicGroup: 'Magnoliopsida > Capparales > Capparaceae',
-    description: 'Traditional wild green berry harvested before ripening. Cured in buttermilk and salt to create the tangy signature element of Marwari cuisine.',
+    description: 'Traditional wild green berry harvested before ripening. Cured in buttermilk and salt to create the tangy signature element of Marwari Panchkuta cuisine.',
     identification: ['Small round green unripened berries', 'Cured in salt water', 'Tangy spicy flavor'],
     habitat: ['Wild Sand Dunes', 'Arid Scrublands'],
     soilPreference: ['Desert Sand'],
@@ -726,7 +726,7 @@ export const plantDatabase: PlantSpecies[] = [
   {
     id: 'prosopis-sangri-veg',
     scientificName: 'Prosopis cineraria (Sangri)',
-    hindiName: 'सांगरी (केजरी फली)',
+    hindiName: 'सांगरी (खेजड़ी फली)',
     localName: 'Sangri Bean Vegetable',
     commonName: 'Desert Bean Pod Vegetable',
     family: 'Fabaceae',
@@ -825,7 +825,7 @@ export const plantDatabase: PlantSpecies[] = [
     panchkutaComponent: 'Gunda (Mucilaginous gumberry)',
     endemic: false,
     districts: ['jodhpur', 'barmer', 'pali', 'nagaur'],
-    imageUrl: 'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=1000&q=80',
+    imageUrl: 'https://images.unsplash.com/photo-1528183429752-a97d0bf99b5a?auto=format&fit=crop&w=1000&q=80',
     references: ['Research Monograph Section 4: Traditional Desert Foods']
   },
   {
