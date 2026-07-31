@@ -7,7 +7,7 @@ interface FooterProps {
 
 export const Footer: React.FC<FooterProps> = ({ setActiveTab }) => {
   return (
-    <footer className="bg-[#4A3B2A] border-t border-[#E8D8B5]/30 text-[#FAF8F3] text-xs py-12">
+    <footer className="bg-[#4A3B2A] border-t border-[#E8D8B5]/30 text-[#FAF8F3] text-xs pt-12 pb-24 sm:pb-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 pb-8 border-b border-[#E8D8B5]/20 font-sans">
@@ -51,11 +51,13 @@ export const Footer: React.FC<FooterProps> = ({ setActiveTab }) => {
 
         </div>
 
-        {/* Bottom Bar */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#E8D8B5]/70 font-nav">
+        {/* Bottom Bar with Extra Right Margin to Avoid Chatbot Button */}
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 text-xs text-[#E8D8B5]/80 font-nav pr-0 sm:pr-48">
           <p>© 2026 Thar Native Vegetation. Dedicated to the Flora & Ecosystems of Marwar, Rajasthan.</p>
-          <p className="flex items-center gap-1">
-            Built with <Heart className="w-3.5 h-3.5 text-[#B65A3C] fill-[#B65A3C]" /> for Conservationists, Students & Researchers
+          <p className="flex items-center gap-1.5 shrink-0">
+            <span>Built with</span>
+            <Heart className="w-3.5 h-3.5 text-[#B65A3C] fill-[#B65A3C]" />
+            <span>for Conservationists, Students & Researchers</span>
           </p>
         </div>
 
