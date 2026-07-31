@@ -1,331 +1,212 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 import { plantDatabase } from '../data/plantDatabase';
-import { PlantSpecies, PlantCategory, ConservationStatus } from '../types';
-import { Search, Filter, Leaf, Droplets, ShieldAlert, ArrowUpRight, Sparkles, RefreshCw } from 'lucide-react';
+import { PlantSpecies } from '../types';
+import { Search, Leaf, TreePine, Sparkles, Utensils, ArrowRight } from 'lucide-react';
 
 interface VegetationExplorerProps {
   onSelectPlant: (plant: PlantSpecies) => void;
-  initialCategory?: string;
 }
 
-export const VegetationExplorer: React.FC<VegetationExplorerProps> = ({ onSelectPlant, initialCategory }) => {
+export const VegetationExplorer: React.FC<VegetationExplorerProps> = ({ onSelectPlant }) => {
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState<string>(initialCategory || 'All');
-  const [selectedFamily, setSelectedFamily] = useState<string>('All');
-  const [selectedConservation, setSelectedConservation] = useState<string>('All');
-  const [maxRainfall, setMaxRainfall] = useState<number>(600);
-  const [showInvasiveOnly, setShowInvasiveOnly] = useState(false);
-  const [showEndemicOnly, setShowEndemicOnly] = useState(false);
-  const [showPanchkutaOnly, setShowPanchkutaOnly] = useState(false);
+  const [activeSection, setActiveSection] = useState<'all' | 'trees' | 'shrubs' | 'vegetables'>('all');
 
-  const categories: (PlantCategory | 'All')[] = ['All', 'Tree', 'Shrub', 'Grass', 'Climber', 'Herb', 'Succulent'];
-  
-  const families = useMemo(() => {
-    const fSet = new Set(plantDatabase.map(p => p.family));
-    return ['All', ...Array.from(fSet)];
-  }, []);
+  const treesList = plantDatabase.filter((p) => p.category === 'Tree');
+  const shrubsList = plantDatabase.filter((p) => p.category === 'Shrub' || p.category === 'Grass' || p.category === 'Herb');
+  const vegetablesList = plantDatabase.filter((p) => p.category === 'Vegetable');
 
-  const filteredPlants = useMemo(() => {
-    return plantDatabase.filter((plant) => {
-      // Category filter
-      if (selectedCategory !== 'All' && plant.category !== selectedCategory) return false;
-      // Family filter
-      if (selectedFamily !== 'All' && plant.family !== selectedFamily) return false;
-      // Conservation status
-      if (selectedConservation !== 'All' && plant.conservationStatus !== selectedConservation) return false;
-      // Max Rainfall filter
-      if (plant.rainfallMinMm > maxRainfall) return false;
-      // Invasive toggle
-      if (showInvasiveOnly && !plant.isInvasive) return false;
-      // Endemic toggle
-      if (showEndemicOnly && !plant.endemic) return false;
-      // Panchkuta toggle
-      if (showPanchkutaOnly && !plant.panchkutaComponent) return false;
-
-      // Global Search
-      if (searchQuery.trim()) {
-        const q = searchQuery.toLowerCase();
-        const match =
-          plant.scientificName.toLowerCase().includes(q) ||
-          plant.hindiName.toLowerCase().includes(q) ||
-          plant.localName.toLowerCase().includes(q) ||
-          plant.commonName.toLowerCase().includes(q) ||
-          plant.family.toLowerCase().includes(q) ||
-          plant.description.toLowerCase().includes(q) ||
-          plant.ecologicalRole.toLowerCase().includes(q);
-        if (!match) return false;
-      }
-
-      return true;
-    });
-  }, [searchQuery, selectedCategory, selectedFamily, selectedConservation, maxRainfall, showInvasiveOnly, showEndemicOnly, showPanchkutaOnly]);
-
-  const resetFilters = () => {
-    setSearchQuery('');
-    setSelectedCategory('All');
-    setSelectedFamily('All');
-    setSelectedConservation('All');
-    setMaxRainfall(600);
-    setShowInvasiveOnly(false);
-    setShowEndemicOnly(false);
-    setShowPanchkutaOnly(false);
+  const filterPlant = (plant: PlantSpecies) => {
+    if (!searchQuery.trim()) return true;
+    const q = searchQuery.toLowerCase();
+    return (
+      plant.scientificName.toLowerCase().includes(q) ||
+      plant.localName.toLowerCase().includes(q) ||
+      plant.hindiName.toLowerCase().includes(q) ||
+      plant.commonName.toLowerCase().includes(q)
+    );
   };
 
   return (
     <section className="py-12 bg-stone-950 text-amber-50 min-h-screen">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         
-        {/* Section Title */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 pb-6 border-b border-amber-800/40">
-          <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-900/60 border border-amber-600/40 text-amber-300 text-xs font-semibold mb-2">
-              <Leaf className="w-3.5 h-3.5 text-emerald-400" />
-              <span>Searchable Floristic Inventory</span>
-            </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-amber-100">
-              Vegetation Explorer & Species Database
-            </h2>
-            <p className="mt-2 text-sm text-amber-300/80 max-w-2xl">
-              Browse native Thar desert flora by growth form, scientific taxonomy, rainfall requirements, medicinal importance, or Panchkuta culinary integration.
-            </p>
+        {/* Header */}
+        <div className="text-center max-w-3xl mx-auto space-y-4">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-900/60 border border-amber-600/40 text-amber-300 text-xs font-bold shadow-lg">
+            <Leaf className="w-4 h-4 text-emerald-400" />
+            <span>Native Species Catalog</span>
+          </div>
+          <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-amber-100">
+            Native Vegetation of Thar Desert
+          </h2>
+          <p className="text-sm text-amber-300/80 leading-relaxed">
+            Explore native trees, shrubs & plants, and traditional vegetables with original photographs and ecological descriptions.
+          </p>
+
+          {/* Search Bar */}
+          <div className="relative max-w-md mx-auto pt-2">
+            <Search className="w-5 h-5 text-amber-400 absolute left-4 top-5" />
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search by plant name (e.g. Khejri, Ker, Sangri)..."
+              className="w-full pl-12 pr-4 py-3 rounded-2xl bg-stone-900 border border-amber-700/60 text-amber-100 text-sm placeholder-amber-400/50 focus:outline-none focus:border-amber-400 shadow-xl"
+            />
           </div>
 
-          <div className="mt-4 md:mt-0 flex items-center gap-3 text-xs">
-            <span className="px-3 py-1.5 rounded-xl bg-amber-900/40 border border-amber-700/50 text-amber-200 font-bold">
-              Showing {filteredPlants.length} of {plantDatabase.length} Species
-            </span>
+          {/* Section Filter Pills */}
+          <div className="flex items-center justify-center gap-2 pt-2 flex-wrap">
             <button
-              onClick={resetFilters}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-stone-800 hover:bg-stone-700 text-amber-300 border border-stone-700 font-semibold transition-all"
-            >
-              <RefreshCw className="w-3.5 h-3.5" /> Reset Filters
-            </button>
-          </div>
-        </div>
-
-        {/* Category Tabs Bar */}
-        <div className="flex items-center gap-2 overflow-x-auto pb-4 scrollbar-none mb-6">
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setSelectedCategory(cat)}
-              className={`px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all ${
-                selectedCategory === cat
-                  ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-amber-950 shadow-lg shadow-amber-500/20 scale-105'
-                  : 'bg-amber-950/60 text-amber-200 hover:bg-amber-900/40 border border-amber-800/40'
+              onClick={() => setActiveSection('all')}
+              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
+                activeSection === 'all'
+                  ? 'bg-amber-500 text-amber-950 shadow-lg scale-105'
+                  : 'bg-stone-900 text-amber-200 hover:bg-amber-900/40 border border-amber-800/40'
               }`}
             >
-              {cat === 'All' ? '🌿 All Growth Forms' : cat}
+              All Sections (30)
             </button>
-          ))}
-        </div>
-
-        {/* Filter Toolbar Card */}
-        <div className="p-5 rounded-2xl bg-stone-900/90 border border-amber-800/50 shadow-xl mb-8 space-y-4">
-          
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            
-            {/* Search Input */}
-            <div className="relative md:col-span-2">
-              <Search className="w-4 h-4 text-amber-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search by Scientific, Hindi, Local Name or Use..."
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-amber-950/60 border border-amber-700/50 text-amber-100 text-xs placeholder-amber-400/50 focus:outline-none focus:border-amber-400 transition-colors"
-              />
-            </div>
-
-            {/* Family Select */}
-            <div>
-              <label className="text-[11px] font-semibold text-amber-400 block mb-1">Botanical Family:</label>
-              <select
-                value={selectedFamily}
-                onChange={(e) => setSelectedFamily(e.target.value)}
-                className="w-full px-3 py-2 rounded-xl bg-amber-950/60 border border-amber-700/50 text-amber-100 text-xs focus:outline-none focus:border-amber-400"
-              >
-                {families.map((f) => (
-                  <option key={f} value={f} className="bg-stone-900 text-amber-100">{f}</option>
-                ))}
-              </select>
-            </div>
-
-            {/* Conservation Status */}
-            <div>
-              <label className="text-[11px] font-semibold text-amber-400 block mb-1">Conservation Status:</label>
-              <select
-                value={selectedConservation}
-                onChange={(e) => setSelectedConservation(e.target.value)}
-                className="w-full px-3 py-2 rounded-xl bg-amber-950/60 border border-amber-700/50 text-amber-100 text-xs focus:outline-none focus:border-amber-400"
-              >
-                {['All', 'Least Concern', 'Vulnerable', 'Near Threatened', 'Critically Endangered'].map((status) => (
-                  <option key={status} value={status} className="bg-stone-900 text-amber-100">{status}</option>
-                ))}
-              </select>
-            </div>
-
-          </div>
-
-          {/* Secondary Toggles & Sliders */}
-          <div className="pt-4 border-t border-amber-800/30 flex flex-col md:flex-row md:items-center justify-between gap-4 text-xs">
-            
-            {/* Rainfall Slider */}
-            <div className="flex items-center gap-3 max-w-sm w-full">
-              <Droplets className="w-4 h-4 text-blue-400 shrink-0" />
-              <span className="text-amber-300 font-semibold shrink-0">Max Rainfall:</span>
-              <input
-                type="range"
-                min="100"
-                max="600"
-                step="50"
-                value={maxRainfall}
-                onChange={(e) => setMaxRainfall(Number(e.target.value))}
-                className="w-full accent-amber-500"
-              />
-              <span className="font-bold text-amber-400 shrink-0">{maxRainfall} mm</span>
-            </div>
-
-            {/* Specialty Checkboxes */}
-            <div className="flex flex-wrap items-center gap-4">
-              <label className="flex items-center gap-2 cursor-pointer text-amber-200">
-                <input
-                  type="checkbox"
-                  checked={showPanchkutaOnly}
-                  onChange={(e) => setShowPanchkutaOnly(e.target.checked)}
-                  className="rounded bg-amber-950 border-amber-600 text-amber-500 focus:ring-0"
-                />
-                <span className="font-medium">🥘 Panchkuta Ingredient</span>
-              </label>
-
-              <label className="flex items-center gap-2 cursor-pointer text-amber-200">
-                <input
-                  type="checkbox"
-                  checked={showEndemicOnly}
-                  onChange={(e) => setShowEndemicOnly(e.target.checked)}
-                  className="rounded bg-amber-950 border-amber-600 text-amber-500 focus:ring-0"
-                />
-                <span className="font-medium">🌵 Regional Endemic</span>
-              </label>
-
-              <label className="flex items-center gap-2 cursor-pointer text-red-300">
-                <input
-                  type="checkbox"
-                  checked={showInvasiveOnly}
-                  onChange={(e) => setShowInvasiveOnly(e.target.checked)}
-                  className="rounded bg-amber-950 border-red-600 text-red-500 focus:ring-0"
-                />
-                <span className="font-medium flex items-center gap-1">
-                  <ShieldAlert className="w-3.5 h-3.5 text-red-400" /> Invasive Alien Threat
-                </span>
-              </label>
-            </div>
-
-          </div>
-
-        </div>
-
-        {/* Species Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredPlants.map((plant) => (
-            <div
-              key={plant.id}
-              onClick={() => onSelectPlant(plant)}
-              className={`group rounded-3xl overflow-hidden bg-stone-900/80 border transition-all duration-300 hover:scale-[1.02] cursor-pointer flex flex-col shadow-xl ${
-                plant.isInvasive
-                  ? 'border-red-600/40 hover:border-red-500'
-                  : 'border-amber-800/40 hover:border-amber-500/80'
+            <button
+              onClick={() => setActiveSection('trees')}
+              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
+                activeSection === 'trees'
+                  ? 'bg-amber-500 text-amber-950 shadow-lg scale-105'
+                  : 'bg-stone-900 text-amber-200 hover:bg-amber-900/40 border border-amber-800/40'
               }`}
             >
-              
-              {/* Card Image */}
-              <div className="relative h-48 w-full overflow-hidden bg-amber-950">
-                <img
-                  src={plant.imageUrl}
-                  alt={plant.scientificName}
-                  onError={(e) => {
-                    e.currentTarget.src = 'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1000&q=80';
-                  }}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-stone-950 via-stone-950/20 to-transparent" />
-                
-                {/* Badges Overlay */}
-                <div className="absolute top-3 left-3 flex flex-wrap gap-1.5">
-                  <span className="px-2.5 py-1 rounded-full bg-amber-950/80 text-amber-200 text-[10px] font-bold border border-amber-600/40 backdrop-blur-md">
-                    {plant.category}
-                  </span>
-                  {plant.panchkutaComponent && (
-                    <span className="px-2 py-0.5 rounded-full bg-amber-500 text-amber-950 text-[10px] font-bold shadow-md">
-                      🥘 Panchkuta
-                    </span>
-                  )}
-                  {plant.isInvasive && (
-                    <span className="px-2 py-0.5 rounded-full bg-red-600 text-white text-[10px] font-bold shadow-md animate-pulse">
-                      ⚠️ Invasive
-                    </span>
-                  )}
-                </div>
-
-                <div className="absolute bottom-3 left-3 right-3 flex items-end justify-between">
-                  <div>
-                    <h3 className="text-lg font-bold text-amber-50 group-hover:text-amber-400 transition-colors italic">
-                      {plant.scientificName}
-                    </h3>
-                    <p className="text-xs font-semibold text-amber-300">{plant.localName} ({plant.hindiName})</p>
-                  </div>
-                  <span className="text-[10px] px-2 py-0.5 rounded bg-stone-900/80 text-amber-400 font-mono border border-amber-700/40">
-                    {plant.family}
-                  </span>
-                </div>
-              </div>
-
-              {/* Card Body */}
-              <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
-                
-                <p className="text-xs text-amber-200/80 line-clamp-3 leading-relaxed">
-                  {plant.description}
-                </p>
-
-                {/* Specs Pill Summary */}
-                <div className="grid grid-cols-2 gap-2 text-[11px] pt-3 border-t border-amber-800/30">
-                  <div className="flex items-center gap-1.5 text-amber-300">
-                    <Droplets className="w-3.5 h-3.5 text-blue-400 shrink-0" />
-                    <span>{plant.rainfallMinMm} - {plant.rainfallMaxMm} mm</span>
-                  </div>
-                  <div className="flex items-center gap-1.5 text-amber-300">
-                    <Sparkles className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-                    <span>{plant.floweringPeriod}</span>
-                  </div>
-                </div>
-
-                {/* CTA Action */}
-                <div className="pt-2 flex items-center justify-between text-xs font-bold text-amber-400 group-hover:text-amber-300">
-                  <span>View Full Monograph & TEK</span>
-                  <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                </div>
-
-              </div>
-
-            </div>
-          ))}
+              🌳 Native Trees ({treesList.length})
+            </button>
+            <button
+              onClick={() => setActiveSection('shrubs')}
+              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
+                activeSection === 'shrubs'
+                  ? 'bg-amber-500 text-amber-950 shadow-lg scale-105'
+                  : 'bg-stone-900 text-amber-200 hover:bg-amber-900/40 border border-amber-800/40'
+              }`}
+            >
+              🌿 Native Shrubs & Plants ({shrubsList.length})
+            </button>
+            <button
+              onClick={() => setActiveSection('vegetables')}
+              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
+                activeSection === 'vegetables'
+                  ? 'bg-amber-500 text-amber-950 shadow-lg scale-105'
+                  : 'bg-stone-900 text-amber-200 hover:bg-amber-900/40 border border-amber-800/40'
+              }`}
+            >
+              🥗 Native Vegetables ({vegetablesList.length})
+            </button>
+          </div>
         </div>
 
-        {filteredPlants.length === 0 && (
-          <div className="text-center py-16 p-8 rounded-3xl bg-stone-900 border border-amber-800/40 space-y-3">
-            <Leaf className="w-12 h-12 text-amber-500/40 mx-auto animate-bounce" />
-            <h3 className="text-xl font-bold text-amber-200">No Plant Species Match Selected Filters</h3>
-            <p className="text-xs text-amber-400/80">Try adjusting your rainfall threshold or search query.</p>
-            <button
-              onClick={resetFilters}
-              className="mt-2 px-4 py-2 rounded-xl bg-amber-600 text-amber-950 font-bold text-xs"
-            >
-              Reset All Filters
-            </button>
+        {/* ==================== A. NATIVE TREES SECTION ==================== */}
+        {(activeSection === 'all' || activeSection === 'trees') && (
+          <div className="space-y-6 pt-4">
+            <div className="pb-3 border-b border-amber-800/40 flex items-center justify-between">
+              <h3 className="text-2xl font-extrabold text-amber-100 flex items-center gap-2">
+                <TreePine className="w-6 h-6 text-emerald-400" /> A. Native Trees
+              </h3>
+              <span className="text-xs text-amber-400 font-semibold">{treesList.filter(filterPlant).length} Trees</span>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {treesList.filter(filterPlant).map((plant) => (
+                <PlantCard key={plant.id} plant={plant} onSelectPlant={onSelectPlant} />
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* ==================== B. NATIVE SHRUBS & PLANTS SECTION ==================== */}
+        {(activeSection === 'all' || activeSection === 'shrubs') && (
+          <div className="space-y-6 pt-8">
+            <div className="pb-3 border-b border-amber-800/40 flex items-center justify-between">
+              <h3 className="text-2xl font-extrabold text-amber-100 flex items-center gap-2">
+                <Leaf className="w-6 h-6 text-emerald-400" /> B. Native Shrubs & Plants
+              </h3>
+              <span className="text-xs text-amber-400 font-semibold">{shrubsList.filter(filterPlant).length} Shrubs & Plants</span>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {shrubsList.filter(filterPlant).map((plant) => (
+                <PlantCard key={plant.id} plant={plant} onSelectPlant={onSelectPlant} />
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* ==================== C. NATIVE VEGETABLES SECTION ==================== */}
+        {(activeSection === 'all' || activeSection === 'vegetables') && (
+          <div className="space-y-6 pt-8">
+            <div className="pb-3 border-b border-amber-800/40 flex items-center justify-between">
+              <h3 className="text-2xl font-extrabold text-amber-100 flex items-center gap-2">
+                <Utensils className="w-6 h-6 text-amber-400" /> C. Traditional Native Vegetables
+              </h3>
+              <span className="text-xs text-amber-400 font-semibold">{vegetablesList.filter(filterPlant).length} Traditional Vegetables</span>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {vegetablesList.filter(filterPlant).map((plant) => (
+                <PlantCard key={plant.id} plant={plant} onSelectPlant={onSelectPlant} />
+              ))}
+            </div>
           </div>
         )}
 
       </div>
     </section>
+  );
+};
+
+{/* Clean Card Component displaying Original Photograph, Local Name, English Name, Scientific Name, and Short Description */}
+const PlantCard: React.FC<{ plant: PlantSpecies; onSelectPlant: (plant: PlantSpecies) => void }> = ({ plant, onSelectPlant }) => {
+  return (
+    <div
+      onClick={() => onSelectPlant(plant)}
+      className="bg-stone-900 rounded-3xl border border-amber-800/50 hover:border-amber-500 overflow-hidden shadow-xl cursor-pointer transition-all duration-300 hover:scale-[1.02] flex flex-col justify-between group"
+    >
+      <div>
+        {/* Original Photograph */}
+        <div className="relative h-48 w-full overflow-hidden bg-amber-950/60">
+          <img
+            src={plant.imageUrl}
+            alt={plant.scientificName}
+            onError={(e) => {
+              e.currentTarget.src = 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=1000&q=80';
+            }}
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          />
+          <div className="absolute top-3 right-3 px-3 py-1 rounded-full bg-black/70 text-amber-300 text-[10px] font-extrabold tracking-wider uppercase border border-amber-500/40">
+            {plant.category}
+          </div>
+        </div>
+
+        {/* Card Details */}
+        <div className="p-5 space-y-2 text-xs">
+          {/* Local Name */}
+          <div className="flex items-center justify-between">
+            <span className="font-extrabold text-sm text-amber-300">{plant.localName} ({plant.hindiName})</span>
+          </div>
+
+          {/* Scientific Name */}
+          <h4 className="font-extrabold text-base text-amber-100 italic">{plant.scientificName}</h4>
+
+          {/* English Name */}
+          <p className="text-[11px] font-semibold text-amber-400/90">{plant.commonName}</p>
+
+          {/* Short Description */}
+          <p className="text-amber-200/80 line-clamp-3 leading-relaxed pt-1">
+            {plant.description}
+          </p>
+        </div>
+      </div>
+
+      {/* Card Footer */}
+      <div className="px-5 py-3.5 bg-amber-950/40 border-t border-amber-800/30 flex items-center justify-between text-xs font-bold text-amber-400 group-hover:text-amber-200">
+        <span>View Plant Details</span>
+        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+      </div>
+    </div>
   );
 };

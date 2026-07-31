@@ -1,118 +1,138 @@
 import React, { useState } from 'react';
 import { plantDatabase } from '../data/plantDatabase';
-import { habitatDatabase } from '../data/habitatDatabase';
-import { Image, Filter, Eye, Camera } from 'lucide-react';
+import { PlantSpecies } from '../types';
+import { Image as ImageIcon, X, ArrowRight, Eye, Leaf } from 'lucide-react';
 
 export const PhotoGallery: React.FC = () => {
-  const [activeCategory, setActiveCategory] = useState<string>('All');
+  const [activeCategory, setActiveCategory] = useState<'all' | 'trees' | 'shrubs' | 'plants' | 'vegetables'>('all');
+  const [selectedPhoto, setSelectedPhoto] = useState<PlantSpecies | null>(null);
 
-  const galleryItems = [
-    ...plantDatabase.map(p => ({
-      id: p.id,
-      title: p.scientificName,
-      subtitle: `${p.localName} (${p.hindiName})`,
-      category: p.category,
-      imageUrl: p.imageUrl,
-      tag: p.family
-    })),
-    ...habitatDatabase.map(h => ({
-      id: h.id,
-      title: h.name,
-      subtitle: h.localTerm,
-      category: 'Habitats',
-      imageUrl: h.imageUrl,
-      tag: 'Ecosystem'
-    })),
-    {
-      id: 'gib-sewan',
-      title: 'Great Indian Bustard in Sewan Grassland',
-      subtitle: 'Wildlife Interaction',
-      category: 'Wildlife',
-      imageUrl: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1000&q=80',
-      tag: 'Conservation'
-    },
-    {
-      id: 'rohida-bloom',
-      title: 'Rohida Blossom Bloom Season',
-      subtitle: 'State Flower of Rajasthan',
-      category: 'Flowers',
-      imageUrl: 'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1000&q=80',
-      tag: 'Blossoms'
-    }
-  ];
-
-  const categories = ['All', 'Tree', 'Shrub', 'Grass', 'Flowers', 'Habitats', 'Wildlife'];
-
-  const filteredItems = galleryItems.filter(item =>
-    activeCategory === 'All' ? true : item.category === activeCategory
-  );
+  const galleryItems = plantDatabase.filter((plant) => {
+    if (activeCategory === 'all') return true;
+    if (activeCategory === 'trees') return plant.category === 'Tree';
+    if (activeCategory === 'shrubs') return plant.category === 'Shrub';
+    if (activeCategory === 'plants') return plant.category === 'Grass' || plant.category === 'Herb';
+    if (activeCategory === 'vegetables') return plant.category === 'Vegetable';
+    return true;
+  });
 
   return (
-    <section className="py-12 bg-amber-950 text-amber-50 min-h-screen">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-12 bg-stone-950 text-amber-50 min-h-screen">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         
-        {/* Title */}
-        <div className="mb-8 pb-6 border-b border-amber-800/40">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-900/60 border border-amber-600/40 text-amber-300 text-xs font-semibold mb-2">
-            <Camera className="w-3.5 h-3.5 text-amber-400" />
-            <span>High-Resolution Visual Archive</span>
+        {/* Header */}
+        <div className="text-center max-w-3xl mx-auto space-y-3">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-900/60 border border-amber-600/40 text-amber-300 text-xs font-bold shadow-lg">
+            <ImageIcon className="w-4 h-4 text-amber-400" />
+            <span>Visual Photography Archive</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-amber-100">
-            Thar Native Flora Photo Gallery
+          <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-amber-100">
+            Thar Vegetation Photo Gallery
           </h2>
-          <p className="mt-2 text-sm text-amber-300/80 max-w-2xl">
-            High-definition scientific photography of Thar desert flora, xerophytic adaptations, seasonal blooms, and wildlife interactions.
+          <p className="text-sm text-amber-300/80">
+            Browse original botanical photographs categorized by Trees, Shrubs, Plants, and Vegetables. Click any photo for a larger view!
           </p>
+
+          {/* 4 Category Tabs */}
+          <div className="flex items-center justify-center gap-2 pt-3 flex-wrap">
+            {[
+              { id: 'all', label: 'All Photos' },
+              { id: 'trees', label: '🌳 Trees' },
+              { id: 'shrubs', label: '🌿 Shrubs' },
+              { id: 'plants', label: '🌱 Plants & Grasses' },
+              { id: 'vegetables', label: '🥗 Traditional Vegetables' }
+            ].map((cat) => (
+              <button
+                key={cat.id}
+                onClick={() => setActiveCategory(cat.id as any)}
+                className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
+                  activeCategory === cat.id
+                    ? 'bg-amber-500 text-amber-950 shadow-lg scale-105'
+                    : 'bg-stone-900 text-amber-200 hover:bg-amber-900/40 border border-amber-800/40'
+                }`}
+              >
+                {cat.label}
+              </button>
+            ))}
+          </div>
         </div>
 
-        {/* Category Tabs */}
-        <div className="flex items-center gap-2 overflow-x-auto pb-4 mb-8 scrollbar-none">
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setActiveCategory(cat)}
-              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
-                activeCategory === cat
-                  ? 'bg-amber-500 text-amber-950 shadow-lg scale-105'
-                  : 'bg-stone-900 text-amber-200 hover:bg-amber-900/40 border border-amber-800/40'
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
-
-        {/* Grid */}
+        {/* Gallery Image Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {filteredItems.map((item) => (
+          {galleryItems.map((item) => (
             <div
               key={item.id}
-              className="group relative h-64 rounded-3xl overflow-hidden bg-stone-900 border border-amber-800/40 shadow-xl cursor-pointer"
+              onClick={() => setSelectedPhoto(item)}
+              className="group relative h-64 rounded-3xl overflow-hidden bg-stone-900 border border-amber-800/40 cursor-pointer shadow-xl transition-all duration-300 hover:scale-[1.02] hover:border-amber-500"
             >
               <img
                 src={item.imageUrl}
-                alt={item.title}
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                alt={item.scientificName}
+                onError={(e) => {
+                  e.currentTarget.src = 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=1000&q=80';
+                }}
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-stone-950 via-stone-950/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
-              
-              <div className="absolute top-3 left-3">
-                <span className="px-2.5 py-1 rounded-full bg-amber-950/80 text-amber-300 text-[10px] font-bold border border-amber-700/50 backdrop-blur-md">
-                  {item.tag}
+
+              {/* Overlay Details */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent p-5 flex flex-col justify-end opacity-90 group-hover:opacity-100 transition-opacity">
+                <span className="px-2.5 py-0.5 rounded-full bg-amber-500 text-amber-950 font-extrabold text-[10px] uppercase w-fit mb-1">
+                  {item.category}
                 </span>
+                <h3 className="font-extrabold text-sm text-amber-100 italic">{item.scientificName}</h3>
+                <p className="text-xs font-bold text-amber-300">{item.localName} ({item.hindiName})</p>
               </div>
 
-              <div className="absolute bottom-4 left-4 right-4 space-y-1">
-                <h3 className="text-sm font-bold text-amber-100 italic group-hover:text-amber-300 transition-colors">
-                  {item.title}
-                </h3>
-                <p className="text-xs font-semibold text-amber-400/90">{item.subtitle}</p>
+              {/* Hover Zoom Icon */}
+              <div className="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/60 flex items-center justify-center text-amber-300 opacity-0 group-hover:opacity-100 transition-opacity">
+                <Eye className="w-4 h-4" />
               </div>
             </div>
           ))}
         </div>
 
       </div>
+
+      {/* Larger Image Lightbox Modal */}
+      {selectedPhoto && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-fadeIn">
+          <div className="relative max-w-3xl w-full bg-stone-900 rounded-3xl border border-amber-700/60 overflow-hidden text-amber-50 shadow-2xl space-y-4 p-6">
+            
+            <button
+              onClick={() => setSelectedPhoto(null)}
+              className="absolute top-4 right-4 z-20 p-2.5 rounded-full bg-black/60 text-amber-100 hover:bg-amber-600 border border-amber-500/40"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            {/* Large Image View */}
+            <div className="h-80 sm:h-96 w-full rounded-2xl overflow-hidden bg-amber-950/60 border border-amber-800/40">
+              <img
+                src={selectedPhoto.imageUrl}
+                alt={selectedPhoto.scientificName}
+                onError={(e) => {
+                  e.currentTarget.src = 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=1000&q=80';
+                }}
+                className="w-full h-full object-cover"
+              />
+            </div>
+
+            {/* Basic Plant Information */}
+            <div className="space-y-2">
+              <div className="flex items-center justify-between">
+                <h3 className="text-2xl font-extrabold text-amber-100 italic">{selectedPhoto.scientificName}</h3>
+                <span className="px-3 py-1 rounded-full bg-amber-500 text-amber-950 font-bold text-xs uppercase">
+                  {selectedPhoto.category}
+                </span>
+              </div>
+              <p className="text-sm font-bold text-amber-300">{selectedPhoto.localName} ({selectedPhoto.hindiName}) — <em>{selectedPhoto.commonName}</em></p>
+              <p className="text-xs text-amber-200/90 leading-relaxed pt-1">{selectedPhoto.description}</p>
+            </div>
+
+          </div>
+        </div>
+      )}
+
     </section>
   );
 };

@@ -1,4 +1,4 @@
-export type PlantCategory = 'Tree' | 'Shrub' | 'Grass' | 'Climber' | 'Herb' | 'Succulent';
+export type PlantCategory = 'Tree' | 'Shrub' | 'Grass' | 'Climber' | 'Herb' | 'Succulent' | 'Vegetable';
 
 export type ConservationStatus = 'Least Concern' | 'Vulnerable' | 'Endangered' | 'Critically Endangered' | 'Near Threatened';
 
