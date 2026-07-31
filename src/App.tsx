@@ -5,6 +5,7 @@ import { AboutSection } from './components/AboutSection';
 import { VegetationExplorer } from './components/VegetationExplorer';
 import { InteractiveMap } from './components/InteractiveMap';
 import { PhotoGallery } from './components/PhotoGallery';
+import { VisitorContributionSection } from './components/VisitorContributionSection';
 import { TharBotanistAI } from './components/TharBotanistAI';
 import { PlantDetailModal } from './components/PlantDetailModal';
 import { SearchModal } from './components/SearchModal';
@@ -31,7 +32,7 @@ export function App() {
   return (
     <div className="min-h-screen bg-stone-950 text-amber-50 font-sans selection:bg-amber-500 selection:text-amber-950 flex flex-col justify-between">
       
-      {/* 1. Simple Navigation Bar */}
+      {/* Navigation Bar */}
       <Navbar
         activeTab={activeTab}
         setActiveTab={setActiveTab}
@@ -44,7 +45,6 @@ export function App() {
           <HeroSection
             onExploreVegetation={() => setActiveTab('explorer')}
             onAskAI={() => {
-              // Trigger floating chatbot
               const chatBtn = document.querySelector('button[class*="fixed bottom-6"]') as HTMLButtonElement;
               if (chatBtn) chatBtn.click();
             }}
@@ -70,9 +70,13 @@ export function App() {
         {activeTab === 'gallery' && (
           <PhotoGallery />
         )}
+
+        {activeTab === 'community' && (
+          <VisitorContributionSection />
+        )}
       </main>
 
-      {/* 5. Floating AI Chatbot "Thar Botanist" (Always available) */}
+      {/* Floating AI Chatbot "Thar Botanist" (Grounded direct answers) */}
       <TharBotanistAI />
 
       {/* Species Detail Modal */}

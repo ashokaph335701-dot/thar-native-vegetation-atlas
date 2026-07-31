@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Leaf, Map, MessageSquare, BookOpen, Image as ImageIcon, Search, Menu, X, Sparkles, Home } from 'lucide-react';
+import { Leaf, Map, MessageSquare, BookOpen, Image as ImageIcon, Search, Menu, X, Sparkles, Home, UserCheck } from 'lucide-react';
 
 interface NavbarProps {
   activeTab: string;
@@ -16,6 +16,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab, onOpenS
     { id: 'explorer', label: 'Native Vegetation', icon: Leaf },
     { id: 'map', label: 'Interactive Map', icon: Map },
     { id: 'gallery', label: 'Photo Gallery', icon: ImageIcon },
+    { id: 'community', label: 'Community Contributions', icon: UserCheck },
   ];
 
   return (
@@ -48,7 +49,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab, onOpenS
                 <button
                   key={item.id}
                   onClick={() => setActiveTab(item.id)}
-                  className={`flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all whitespace-nowrap ${
+                  className={`flex items-center gap-2 px-3.5 py-2.5 rounded-xl font-bold text-xs transition-all whitespace-nowrap ${
                     isActive
                       ? 'bg-amber-500 text-amber-950 shadow-lg scale-105'
                       : 'text-amber-200/90 hover:text-amber-100 hover:bg-amber-900/40 border border-amber-800/30'

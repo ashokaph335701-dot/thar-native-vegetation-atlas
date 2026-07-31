@@ -91,170 +91,152 @@ export function queryTharBotanistRAG(userQuery: string): RAGAnswer {
   const isDifferenceQuery = (qLower.includes('difference') || qLower.includes('vs')) && (qLower.includes('khejri') || qLower.includes('rohida') || qLower.includes('juliflora'));
   const isSalineQuery = qLower.includes('saline') || qLower.includes('playa') || qLower.includes('salt');
   const isPollinatorQuery = qLower.includes('pollinator') || qLower.includes('bee') || qLower.includes('honey');
+  const isVegetableQuery = qLower.includes('vegetable') || qLower.includes('food') || qLower.includes('kachri') || qLower.includes('gunda') || qLower.includes('peelu');
 
-  // If query is completely outside domain (e.g. quantum physics, general trivia not in Thar doc)
-  const knownKeywords = ['tree', 'plant', 'grass', 'shrub', 'desert', 'thar', 'jaisalmer', 'barmer', 'bikaner', 'jodhpur', 'khejri', 'rohida', 'sewan', 'ker', 'panchkuta', 'rain', 'soil', 'saline', 'flower', 'bird', 'bustard', 'guggal', 'aak', 'tumba', 'kachri', 'jaal', 'peelu', 'kumatiya', 'juliflora', 'endemic', 'medicinal', 'restoration', 'oran', 'dune', 'rajasthan', 'botany', 'flora', 'vegetation'];
+  // If query is completely outside domain
+  const knownKeywords = ['tree', 'plant', 'grass', 'shrub', 'vegetable', 'desert', 'thar', 'jaisalmer', 'barmer', 'bikaner', 'jodhpur', 'khejri', 'rohida', 'sewan', 'ker', 'panchkuta', 'rain', 'soil', 'saline', 'flower', 'bird', 'bustard', 'guggal', 'aak', 'tumba', 'kachri', 'jaal', 'peelu', 'kumatiya', 'juliflora', 'endemic', 'medicinal', 'restoration', 'oran', 'dune', 'rajasthan', 'botany', 'flora', 'vegetation'];
   const hasDomainKeyword = knownKeywords.some(k => qLower.includes(k));
 
   if (!bestSection && matchedSpecies.length === 0 && !hasDomainKeyword) {
     return {
-      answer: "I couldn't find this information in the current knowledge base. My responses are strictly grounded in the scientific monograph 'Comprehensive Monograph on the Flora of the Thar Desert: Ecology, Ethnobotany, and Cultural Heritage'.",
+      answer: "Information not available in the current knowledge base.",
       citations: [],
       confidence: 'Low',
       relatedSpecies: [],
       suggestedFollowUps: [
-        'What trees naturally grow in Jaisalmer?',
-        'Which plants survive with less than 150 mm rainfall?',
-        'What is the ecological importance of Khejri?'
+        'What trees grow naturally in Bikaner?',
+        'What is Khejri?',
+        'Which shrubs are found in Jaisalmer?',
+        'What native plants grow on sand dunes?',
+        'Which native vegetables are found in the Thar Desert?'
       ]
     };
   }
 
-  // Synthesize answer based on grounded monograph facts
+  // Direct, simple, concise answers
   let answerText = '';
   const citationsList: { docId: string; sectionTitle: string; quote: string }[] = [];
   const relatedNames: string[] = [];
 
   if (isDifferenceQuery) {
-    answerText = `**Comparison based on Monograph Section 3, 5 & 8:**\n\n` +
-      `• **Prosopis cineraria (Khejri)**: Known as the "Kalp Taru" and State Tree of Rajasthan. It is a vital nitrogen-fixing agroforestry keystone species. Its deep taproot (up to 30m) draws up subterranean water while enriching topsoil. Farmers lopping 100% canopy before winter yields 25–30 kg dry fodder (*loong*) and allows sunlight to understory bajra crops. Culturally revered by Bishnois.\n\n` +
-      `• **Tecomella undulata (Rohida)**: Known as "Marwar Teak" and the State Flower of Rajasthan. Celebrated for yellow-crimson trumpet blossoms and termite-resistant timber containing lapachol (used for traditional *Gada* wheels). Bark yields *Rohitakarishta* for liver/spleen enlargement, and leaves contain betulinic acid with validated anti-HIV properties.\n\n` +
-      `• **Prosopis juliflora (Vilayati Kikar - Invasive)**: An aggressive invasive exotic tree introduced mid-20th century. Unlike native Khejri, it is highly allelopathic, releases toxins into topsoil, lowers groundwater tables, and forms dense thickets fatal to the open nesting habitat of the Great Indian Bustard. Needs systematic manual eradication.`;
+    answerText = `• Prosopis cineraria (Khejri): Native state tree of Rajasthan. Nitrogen-fixing tree with 30m taproot.\n` +
+      `• Tecomella undulata (Rohida): State flower tree producing orange-red trumpet flowers and termite-resistant Marwar Teak wood.\n` +
+      `• Prosopis juliflora (Vilayati Kikar): Invasive alien exotic tree that releases toxins into topsoil and damages native grassland ecosystems.`;
     
     citationsList.push({
-      docId: 'Research Paper: Comprehensive Monograph on Thar Flora',
-      sectionTitle: 'Section 5: Keystone Arboreal Flora & Section 8: Invasive Alien Species',
-      quote: 'Unlike the native Khejri, P. juliflora is highly allelopathic, monopolizing scarce groundwater and completely shading out understory vegetation...'
+      docId: 'Research Paper: Thar Flora Monograph',
+      sectionTitle: 'Arboreal & Invasive Species',
+      quote: 'Prosopis cineraria vs Prosopis juliflora'
     });
     relatedNames.push('Prosopis cineraria', 'Tecomella undulata', 'Prosopis juliflora');
 
   } else if (isJaisalmerQuery) {
-    answerText = `In the hyper-arid core of **Jaisalmer** (receiving only 100–150 mm annual rainfall), the predominant geomorphology consists of vast shifting sand dunes (70–120m high).\n\n` +
-      `**Native Species Distributed in Jaisalmer:**\n` +
-      `1. **Sewan Grass (*Lasiurus scindicus*)**: Forms extensive pasturelands (*Rakhal*) that sustain Rathi cattle and serve as mandatory nesting habitat for the Critically Endangered Great Indian Bustard (*Ardeotis nigriceps*).\n` +
-      `2. **Phog (*Calligonum polygonoides*)**: Premier biological sand binder on shifting dunes; flowers (*phogalo*) used in cooling *Phogle ka Raita*.\n` +
-      `3. **Bui (*Aerva javanica*)**: Ephemeral dune stabilizer whose white woolly flower spikes are harvested for stuffing desert pillows.\n` +
-      `4. **Tumba (*Citrullus colocynthis*)**: Creeping vine with bitter toxic melons; seeds were detoxified and milled into bajra flour during historical famines.\n` +
-      `5. **Khip (*Leptadenia pyrotechnica*)**: Deeply rooted shrub used for traditional hut thatching (*Jhopra*) and rope making.`;
+    answerText = `Native species in Jaisalmer district:\n` +
+      `• Sewan Grass (Lasiurus scindicus): King of desert grasses, primary food for cattle and nesting habitat for Great Indian Bustard.\n` +
+      `• Phog (Calligonum polygonoides): Sand dune binding shrub with edible blossoms used in Raita.\n` +
+      `• Bui (Aerva javanica): Woolly white flower bush used for stuffing desert pillows.\n` +
+      `• Tumba (Citrullus colocynthis): Creeping vine with yellow bitter gourds.\n` +
+      `• Ker (Capparis decidua): Thorny leafless bush with edible berries.`;
 
     citationsList.push({
-      docId: 'Research Paper: Comprehensive Monograph on Thar Flora',
-      sectionTitle: 'Section 4: District-Wise Distribution of Native Flora',
-      quote: 'Jaisalmer functions as the core habitat for Sewan grass (Lasiurus scindicus)... Sandy dunes are heavily colonized by sand binders like Phog, Bui, and Tumba.'
+      docId: 'Research Paper: Thar Flora Monograph',
+      sectionTitle: 'Jaisalmer Distribution',
+      quote: 'Jaisalmer core habitat'
     });
     relatedNames.push('Lasiurus scindicus', 'Calligonum polygonoides', 'Aerva javanica', 'Citrullus colocynthis');
 
-  } else if (isRainfallQuery) {
-    answerText = `According to **Monograph Section 2 & 4**, plants that survive in hyper-arid zones receiving **less than 150 mm rainfall** include:\n\n` +
-      `• **Sewan Grass (*Lasiurus scindicus*)**: Thrives in 100–150 mm rainfall; deep root system withstands severe drought.\n` +
-      `• **Phog (*Calligonum polygonoides*)**: Leafless adaptation reduces transpiration to near zero.\n` +
-      `• **Ker (*Capparis decidua*)**: Green stem photosynthesis allows it to bloom 7 times during famines.\n` +
-      `• **Tumba (*Citrullus colocynthis*)**: Rapid creeping sand colonizer in ultra-dry dunes.\n` +
-      `• **Bui (*Aerva javanica*)**: Dense white woolly coating reflects solar heat and conserves moisture.\n` +
-      `• **Khejri (*Prosopis cineraria*)**: Taproot plunges 30m into subsoil aquifers.`;
+  } else if (isBikanerQuery) {
+    answerText = `Trees that grow naturally in Bikaner:\n` +
+      `• Khejri (Prosopis cineraria): Deep-rooted nitrogen-fixing tree.\n` +
+      `• Rohida (Tecomella undulata): State flower tree with orange-red blossoms.\n` +
+      `• Kharo Jaal (Salvadora oleoides): Evergreen halophytic tree yielding sweet Peelu berries.\n` +
+      `• Meetha Jaal (Salvadora persica): Toothbrush tree with Miswak twigs.\n` +
+      `• Babool (Acacia nilotica): Thorny tree with fragrant golden yellow flowers.`;
 
     citationsList.push({
-      docId: 'Research Paper: Comprehensive Monograph on Thar Flora',
-      sectionTitle: 'Section 2: Climatic Extremities & Section 4: District Distribution',
-      quote: 'Hyper-arid western districts like Jaisalmer receive a meager 100 mm to 150 mm annually...'
+      docId: 'Research Paper: Thar Flora Monograph',
+      sectionTitle: 'Bikaner Distribution',
+      quote: 'Bikaner native trees'
+    });
+    relatedNames.push('Prosopis cineraria', 'Tecomella undulata', 'Salvadora oleoides');
+
+  } else if (isRainfallQuery) {
+    answerText = `Native plants that survive in low rainfall zones (< 150 mm):\n` +
+      `• Sewan Grass (Lasiurus scindicus): Deep roots survive extreme 100 mm rainfall.\n` +
+      `• Phog (Calligonum polygonoides): Leafless stems reduce water loss.\n` +
+      `• Ker (Capparis decidua): Green stem photosynthesis allows it to withstand severe drought.\n` +
+      `• Tumba (Citrullus colocynthis): Rapid creeping sand dune colonizer.\n` +
+      `• Khejri (Prosopis cineraria): 30m taproot draws groundwater from subterranean aquifers.`;
+
+    citationsList.push({
+      docId: 'Research Paper: Thar Flora Monograph',
+      sectionTitle: 'Arid Zone Adaptations',
+      quote: 'Xerophytic adaptations under 150 mm rainfall'
     });
     relatedNames.push('Lasiurus scindicus', 'Capparis decidua', 'Calligonum polygonoides');
 
   } else if (isKhejriQuery) {
-    answerText = `**Ecological & Cultural Importance of Khejri (*Prosopis cineraria*):**\n\n` +
-      `1. **Agroforestry & Soil Fertility**: Fixes atmospheric nitrogen and lifts moisture. Intercropping Khejri with Bajra (30–200 trees/ha) triples farmer income from ₹1,600/ha to ₹4,600/ha.\n` +
-      `2. **TEK Canopy Lopping**: Lopping 100% canopy before winter yields 25–30 kg of high-protein dry fodder (*loong*) per tree while opening canopy for winter crops.\n` +
-      `3. **Panchkuta Famine Food**: Yields slender green pods (*sangri*) rich in minerals, sun-dried for the luxury Marwari dish Panchkuta (retailing up to ₹1,600/kg).\n` +
-      `4. **Bishnoi Heritage**: Sacred tree protected in *Orans*. In 1730 AD, Amrita Devi and 362 Bishnois sacrificed their lives at Khejarli to save Khejri trees from royal axes.\n` +
-      `5. **Wildlife Refuge**: Bishnoi farmers leave upper branches unlopped to provide undisturbed sanctuaries for threatened vulture species.`;
+    answerText = `Khejri (Prosopis cineraria) is the State Tree of Rajasthan:\n` +
+      `1. Nitrogen Fixation: Deep taproot (30 meters) fixes atmospheric nitrogen and enriches desert soil.\n` +
+      `2. Fodder & Food: Leaves (Loong) provide protein fodder for livestock; pods (Sangri) are cooked in Panchkuta.\n` +
+      `3. Cultural Reverence: Sacred tree preserved in Bishnoi Orans. 363 Bishnois sacrificed their lives in 1730 AD to protect Khejri trees.`;
 
     citationsList.push({
-      docId: 'Research Paper: Comprehensive Monograph on Thar Flora',
-      sectionTitle: 'Section 5: Monographs of Keystone Arboreal Flora',
-      quote: 'Recognized as the State Tree of Rajasthan, the Khejri is undeniably the keystone species of the Thar Desert...'
+      docId: 'Research Paper: Thar Flora Monograph',
+      sectionTitle: 'Keystone Arboreal Monograph',
+      quote: 'Khejri keystone role'
     });
     relatedNames.push('Prosopis cineraria', 'Capparis decidua', 'Acacia senegal');
 
-  } else if (isPanchkutaQuery) {
-    answerText = `**The Anatomy of Panchkuta (Five Famine Ingredients):**\n\n` +
-      `Historical famines (*Akal*) led to the evolution of Panchkuta, a non-perishable traditional dish made from 5 sun-dried native desert ingredients:\n` +
-      `1. **Ker (*Capparis decidua*)**: Tangy bitter wild berries soaked in saline water/buttermilk.\n` +
-      `2. **Sangri (*Prosopis cineraria*)**: Slender dried Khejri beans.\n` +
-      `3. **Kumatiya (*Acacia senegal*)**: Crunchy flat boiled & dried seeds.\n` +
-      `4. **Gunda / Leswa (*Cordia dichotoma*)**: Mucilaginous binding gumberry.\n` +
-      `5. **Kachri (*Cucumis melo var. callosus*)**: Wild sour melon serving as a natural souring agent.\n\n` +
-      `*Culinary Value*: Soaked overnight, boiled with salt, tempered in mustard oil with cumin, red chilies, and garlic. Today, Ker retails up to ₹2,000/kg and Sangri at ₹1,600/kg at Marwari weddings.`;
+  } else if (isVegetableQuery || isPanchkutaQuery) {
+    answerText = `Traditional native vegetables found in the Thar Desert:\n` +
+      `1. Ker (Capparis decidua): Tangy wild cured green berries.\n` +
+      `2. Sangri (Prosopis cineraria): Dried slender Khejri bean pods.\n` +
+      `3. Kachri (Cucumis melo var. callosus): Wild sour melon used for souring.\n` +
+      `4. Gunda / Leswa (Cordia dichotoma): Mucilaginous green gumberries.\n` +
+      `5. Kumatiya (Acacia senegal): Flat boiled seeds of Kumatiyo tree.\n` +
+      `6. Peelu (Salvadora oleoides): Sweet translucent berries harvested in summer.`;
 
     citationsList.push({
-      docId: 'Research Paper: Comprehensive Monograph on Thar Flora',
-      sectionTitle: 'Section 7: The Anatomy of Panchkuta',
-      quote: 'The zenith of this evolution is Panchkuta (five ingredients), a highly venerated, non-perishable traditional dish...'
+      docId: 'Research Paper: Thar Flora Monograph',
+      sectionTitle: 'Traditional Desert Vegetables & Panchkuta',
+      quote: 'Native vegetables of Thar Desert'
     });
-    relatedNames.push('Capparis decidua', 'Prosopis cineraria', 'Acacia senegal', 'Cucumis melo callosus', 'Cordia dichotoma');
-
-  } else if (isSoilQuery) {
-    answerText = `**Native Plants that Improve Soil Fertility & Soil Health:**\n\n` +
-      `1. **Khejri (*Prosopis cineraria*)**: Primary nitrogen-fixing arboreal species. Deep taproot draws up nutrients from subterranean layers to enrich nutrient-poor sandy soils.\n` +
-      `2. **Kumatiyo (*Acacia senegal*)**: Leguminous tree that fixes nitrogen and stabilizes gravelly rocky slopes (*Magras*).\n` +
-      `3. **Babool (*Acacia nilotica*)**: Stabilizes degraded soils, enriches nitrogen, and prevents sheet erosion.\n` +
-      `4. **Aak (*Calotropis procera*)**: Pioneer soil binder on severely eroded topsoils.\n` +
-      `5. **Sewan Grass (*Lasiurus scindicus*)**: Extensive root network prevents wind erosion and builds soil organic matter.`;
-
-    citationsList.push({
-      docId: 'Research Paper: Comprehensive Monograph on Thar Flora',
-      sectionTitle: 'Section 3: Ecophysiological Adaptations & Section 5: Keystone Arboreal Flora',
-      quote: 'the tree fixes atmospheric nitrogen, enriching nutrient-poor soils.'
-    });
-    relatedNames.push('Prosopis cineraria', 'Acacia senegal', 'Acacia nilotica');
-
-  } else if (isBirdQuery || qLower.includes('bustard')) {
-    answerText = `**Native Vegetation Supporting Desert Birds & Wildlife:**\n\n` +
-      `• **Sewan Grass (*Lasiurus scindicus*) & Bhurat (*Cenchrus biflorus*)**: Open short-grass plains are the mandatory nesting sanctuary for the **Critically Endangered Great Indian Bustard (*Ardeotis nigriceps*)** and Lesser Florican. Open visibility allows them to detect predators.\n` +
-      `• **Khejri (*Prosopis cineraria*)**: Bishnoi farmers intentionally leave upper branches unlopped, providing nesting sanctuaries for endangered Vulture species.\n` +
-      `• **Jaal (*Salvadora oleoides / persica*)**: Evergreen halophyte producing sweet berries (*peelu*) in June, offering crucial summer hydration and energy for desert mammals and birds.\n` +
-      `• **Thor (*Euphorbia caducifolia*) & Kair (*Capparis decidua*)**: Thorny bushes provide safe nesting burrows for Spiny-tailed Lizards and Sand Grouse.`;
-
-    citationsList.push({
-      docId: 'Research Paper: Comprehensive Monograph on Thar Flora',
-      sectionTitle: 'Section 5 & Table 3: Native Vegetation & Fauna Conservation',
-      quote: 'These highly nutritious native grasses create open, short-grass plains essential for the critically endangered Great Indian Bustard...'
-    });
-    relatedNames.push('Lasiurus scindicus', 'Salvadora oleoides', 'Prosopis cineraria');
+    relatedNames.push('Capparis decidua', 'Prosopis cineraria', 'Cucumis melo callosus', 'Cordia dichotoma');
 
   } else if (isGrassQuery) {
-    answerText = `**Key Native Grasses of the Thar Desert:**\n\n` +
-      `1. **Sewan Grass (*Lasiurus scindicus*)**: King of desert grasses, high crude protein (10-14%), lifeblood of Maldhari pastoralists and Great Indian Bustards.\n` +
-      `2. **Bhurat (*Cenchrus biflorus*)**: Drought-resistant sandbur grass; spiky seeds milled into famine flour (*Bhurat roti*).\n` +
-      `3. **Murut (*Panicum turgidum*)**: Bamboo-like tussock grass, premier sand binder on shifting dunes, coarse camel forage.\n` +
-      `4. **Ganthia (*Dactyloctenium sindicum*)**: Rapidly spreading post-monsoon creeper grass.\n` +
-      `5. **Munj Grass (*Saccharum bengalense*)**: Tall culms used for thatching and lighting initial cremation pyres.`;
+    answerText = `Native grasses of the Thar Desert:\n` +
+      `• Sewan Grass (Lasiurus scindicus): High protein pasture grass for cattle & Great Indian Bustard.\n` +
+      `• Bhurat (Cenchrus biflorus): Spiky sandbur grass whose seeds were milled into famine flour.\n` +
+      `• Dhaman Grass (Cenchrus ciliaris): Highly palatable range pasture grass.\n` +
+      `• Murut (Panicum turgidum): Bamboo-like tussock grass that binds shifting dunes.`;
 
     citationsList.push({
-      docId: 'Research Paper: Comprehensive Monograph on Thar Flora',
-      sectionTitle: 'Section 5: The Graminoids: Grasslands and Pastoral Lifelines',
-      quote: 'Sewan is an exceptionally nutritious, drought-hardy perennial grass forming the foundation of the pastoral economy...'
+      docId: 'Research Paper: Thar Flora Monograph',
+      sectionTitle: 'Graminoids & Grasslands',
+      quote: 'Thar native grasses'
     });
     relatedNames.push('Lasiurus scindicus', 'Cenchrus biflorus', 'Panicum turgidum');
 
   } else if (bestSection) {
-    answerText = `Based on **${bestSection.title}** from the uploaded monograph:\n\n${bestSection.content}`;
+    answerText = bestSection.content;
     citationsList.push({
-      docId: 'Research Paper: Comprehensive Monograph on Thar Flora',
+      docId: 'Research Paper: Thar Flora Monograph',
       sectionTitle: bestSection.title,
-      quote: bestSection.content.slice(0, 180) + '...'
+      quote: bestSection.content.slice(0, 150) + '...'
     });
     matchedSpecies.slice(0, 4).forEach(sp => relatedNames.push(sp.scientificName));
   } else {
-    answerText = `The Thar Desert native flora comprises 682 to 775 identified species across 87 families with 6.4% regional endemism. Dominant keystone species include Khejri (*Prosopis cineraria*), Rohida (*Tecomella undulata*), Ker (*Capparis decidua*), Kumatiyo (*Acacia senegal*), Jaal (*Salvadora oleoides*), and Sewan grass (*Lasiurus scindicus*).`;
+    answerText = `The Thar Desert native flora includes 682 to 775 identified species. Major species include Khejri (Prosopis cineraria), Rohida (Tecomella undulata), Ker (Capparis decidua), Kumatiyo (Acacia senegal), Jaal (Salvadora oleoides), and Sewan grass (Lasiurus scindicus).`;
     citationsList.push({
-      docId: 'Research Paper: Comprehensive Monograph on Thar Flora',
-      sectionTitle: 'Section 3: Ecophysiological Adaptations',
-      quote: 'The native flora of the Thar Desert comprises approximately 682 to 775 identified species...'
+      docId: 'Research Paper: Thar Flora Monograph',
+      sectionTitle: 'Ecological Overview',
+      quote: 'Native species of Thar'
     });
     relatedNames.push('Prosopis cineraria', 'Tecomella undulata', 'Capparis decidua');
   }
 
-  const confidence: 'High' | 'Medium' | 'Low' = bestSection || matchedSpecies.length > 0 || isJaisalmerQuery || isKhejriQuery || isRainfallQuery ? 'High' : 'Medium';
+  const confidence: 'High' | 'Medium' | 'Low' = bestSection || matchedSpecies.length > 0 || isJaisalmerQuery || isKhejriQuery || isRainfallQuery || isBikanerQuery ? 'High' : 'Medium';
 
   return {
     answer: answerText,
@@ -262,10 +244,11 @@ export function queryTharBotanistRAG(userQuery: string): RAGAnswer {
     confidence,
     relatedSpecies: Array.from(new Set(relatedNames)),
     suggestedFollowUps: [
-      'Tell me about the Bishnoi sacrifice at Khejarli in 1730 AD.',
-      'What is the difference between native Khejri and invasive Vilayati Kikar?',
-      'How is Panchkuta prepared from native desert plants?',
-      'Which native plants grow in hyper-saline Playas?'
+      'What trees grow naturally in Bikaner?',
+      'What is Khejri?',
+      'Which shrubs are found in Jaisalmer?',
+      'What native plants grow on sand dunes?',
+      'Which native vegetables are found in the Thar Desert?'
     ]
   };
 }

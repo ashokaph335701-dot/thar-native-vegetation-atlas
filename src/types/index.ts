@@ -39,6 +39,22 @@ export interface PlantSpecies {
   references: string[];
 }
 
+export interface VisitorSubmission {
+  id: string;
+  category: PlantCategory;
+  localName: string;
+  hindiName: string;
+  commonName: string;
+  scientificName: string;
+  description: string;
+  district: string;
+  imageUrl: string;
+  contributorName: string;
+  status: 'pending' | 'approved' | 'rejected';
+  submittedAt: string;
+  adminNotes?: string;
+}
+
 export interface DistrictData {
   id: string;
   name: string;
@@ -58,21 +74,6 @@ export interface DistrictData {
   mapCoordinates: { x: number; y: number };
   svgPathD?: string;
   color?: string;
-}
-
-export interface HabitatData {
-  id: string;
-  name: string;
-  localTerm: string;
-  overview: string;
-  nativeFlora: string[];
-  typicalFauna: string[];
-  climate: string;
-  ecologicalImportance: string;
-  threats: string[];
-  conservationPractices: string[];
-  imageUrl: string;
-  areaCoveragePercent?: number;
 }
 
 export interface ResearchDocument {
