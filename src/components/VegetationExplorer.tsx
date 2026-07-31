@@ -173,7 +173,7 @@ const PlantCard: React.FC<{ plant: PlantSpecies; onSelectPlant: (plant: PlantSpe
             src={plant.imageUrl}
             alt={plant.scientificName}
             onError={(e) => {
-              e.currentTarget.src = 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=1000&q=80';
+              e.currentTarget.src = 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Prosopis_cineraria_W_IMG_2814.jpg/800px-Prosopis_cineraria_W_IMG_2814.jpg';
             }}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           />

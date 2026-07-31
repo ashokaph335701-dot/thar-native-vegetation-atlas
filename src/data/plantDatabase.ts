@@ -34,7 +34,7 @@ export const plantDatabase: PlantSpecies[] = [
     panchkutaComponent: 'Sangri (Dried Khejri bean pod)',
     endemic: false,
     districts: ['jaisalmer', 'barmer', 'jodhpur', 'bikaner', 'nagaur', 'churu', 'pali', 'jalor'],
-    imageUrl: 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=1000&q=80',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Prosopis_cineraria_W_IMG_2814.jpg/800px-Prosopis_cineraria_W_IMG_2814.jpg',
     references: ['Research Monograph Section 3: Keystone Arboreal Flora']
   },
   {
@@ -68,7 +68,7 @@ export const plantDatabase: PlantSpecies[] = [
     interestingFacts: ['Wood contains lapachol making it 100% resistant to termites.'],
     endemic: true,
     districts: ['barmer', 'jaisalmer', 'jodhpur', 'bikaner', 'nagaur'],
-    imageUrl: 'https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&w=1000&q=80',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Tecomella_undulata_flower.jpg/800px-Tecomella_undulata_flower.jpg',
     references: ['Research Monograph Section 3: Keystone Arboreal Flora']
   },
   {
@@ -103,7 +103,7 @@ export const plantDatabase: PlantSpecies[] = [
     panchkutaComponent: 'Kumatiya (Dried flat seeds)',
     endemic: false,
     districts: ['barmer', 'jodhpur', 'pali', 'jalor', 'jaisalmer'],
-    imageUrl: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1000&q=80',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Acacia_senegal_Habitus.jpg/800px-Acacia_senegal_Habitus.jpg',
     references: ['Research Monograph Section 3']
   },
   {
@@ -137,7 +137,7 @@ export const plantDatabase: PlantSpecies[] = [
     interestingFacts: ['Pods resemble a string of grey beads.'],
     endemic: false,
     districts: ['jodhpur', 'nagaur', 'pali', 'churu', 'bikaner'],
-    imageUrl: 'https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=1000&q=80',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Acacia_nilotica_flower_heads.jpg/800px-Acacia_nilotica_flower_heads.jpg',
     references: ['Research Monograph Section 3']
   },
   {
@@ -171,7 +171,7 @@ export const plantDatabase: PlantSpecies[] = [
     interestingFacts: ['Berries ripen in May–June during peak dry summer.'],
     endemic: false,
     districts: ['bikaner', 'jaisalmer', 'barmer', 'jodhpur'],
-    imageUrl: 'https://images.unsplash.com/photo-1541675154750-0444c7d51e8e?auto=format&fit=crop&w=1000&q=80',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Salvadora_persica_002.jpg/800px-Salvadora_persica_002.jpg',
     references: ['Research Monograph Section 3']
   },
   {
@@ -205,7 +205,7 @@ export const plantDatabase: PlantSpecies[] = [
     interestingFacts: ['WHO recommends Miswak as an effective natural toothbrush.'],
     endemic: false,
     districts: ['bikaner', 'jaisalmer', 'barmer'],
-    imageUrl: 'https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1000&q=80',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Salvadora_persica_Miswak.jpg/800px-Salvadora_persica_Miswak.jpg',
     references: ['Research Monograph Section 3']
   },
   {
@@ -239,7 +239,7 @@ export const plantDatabase: PlantSpecies[] = [
     interestingFacts: ['Hard woody shell was historically used for gunpowder casings.'],
     endemic: false,
     districts: ['jodhpur', 'barmer', 'nagaur', 'pali'],
-    imageUrl: 'https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&w=1000&q=80',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Balanites_aegyptiaca_leaves_and_thorns.jpg/800px-Balanites_aegyptiaca_leaves_and_thorns.jpg',
     references: ['Research Monograph Section 3']
   },
   {
@@ -273,7 +273,7 @@ export const plantDatabase: PlantSpecies[] = [
     interestingFacts: ['Sheds leaves during summer to conserve water.'],
     endemic: false,
     districts: ['jodhpur', 'barmer', 'nagaur', 'pali', 'churu'],
-    imageUrl: 'https://images.unsplash.com/photo-1528183429752-a97d0bf99b5a?auto=format&fit=crop&w=1000&q=80',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Ziziphus_mauritiana_fruit_and_leaves.jpg/800px-Ziziphus_mauritiana_fruit_and_leaves.jpg',
     references: ['Research Monograph Section 3']
   },
   {
@@ -307,7 +307,7 @@ export const plantDatabase: PlantSpecies[] = [
     interestingFacts: ['Azadirachtin deters insect pests without harming bees.'],
     endemic: false,
     districts: ['jodhpur', 'nagaur', 'pali', 'churu', 'bikaner'],
-    imageUrl: 'https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=1000&q=80',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Azadirachta_indica_Neem_Leaves.jpg/800px-Azadirachta_indica_Neem_Leaves.jpg',
     references: ['Research Monograph Section 3']
   },
   {
@@ -341,7 +341,7 @@ export const plantDatabase: PlantSpecies[] = [
     interestingFacts: ['Dense rosewood timber resists heavy wear.'],
     endemic: false,
     districts: ['jodhpur', 'pali', 'nagaur'],
-    imageUrl: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=80',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Dalbergia_sissoo_leaves.jpg/800px-Dalbergia_sissoo_leaves.jpg',
     references: ['Research Monograph Section 3']
   },
 
@@ -377,7 +377,7 @@ export const plantDatabase: PlantSpecies[] = [
     interestingFacts: ['IUCN Critically Endangered due to destructive resin harvesting.'],
     endemic: true,
     districts: ['barmer', 'jodhpur', 'jaisalmer', 'pali'],
-    imageUrl: 'https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&w=1000&q=80',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Commiphora_wightii_plant.jpg/800px-Commiphora_wightii_plant.jpg',
     references: ['Research Monograph Section 4']
   },
   {
@@ -411,7 +411,7 @@ export const plantDatabase: PlantSpecies[] = [
     interestingFacts: ['Monarch butterflies depend exclusively on Aak for breeding.'],
     endemic: false,
     districts: ['jaisalmer', 'barmer', 'jodhpur', 'bikaner', 'churu', 'pali', 'nagaur', 'jalor'],
-    imageUrl: 'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1000&q=80',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Calotropis_procera_flower_buds.jpg/800px-Calotropis_procera_flower_buds.jpg',
     references: ['Research Monograph Section 4']
   },
   {
@@ -445,7 +445,7 @@ export const plantDatabase: PlantSpecies[] = [
     interestingFacts: ['Woody root yields intense high-temperature charcoal.'],
     endemic: false,
     districts: ['jaisalmer', 'bikaner', 'barmer', 'churu'],
-    imageUrl: 'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1000&q=80',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Calligonum_polygonoides_habit.jpg/800px-Calligonum_polygonoides_habit.jpg',
     references: ['Research Monograph Section 4']
   },
   {
@@ -479,7 +479,7 @@ export const plantDatabase: PlantSpecies[] = [
     interestingFacts: ['Fluffy white spikes do not decay for months.'],
     endemic: false,
     districts: ['jaisalmer', 'barmer', 'bikaner', 'jodhpur'],
-    imageUrl: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1000&q=80',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Aerva_javanica_woolly_spikes.jpg/800px-Aerva_javanica_woolly_spikes.jpg',
     references: ['Research Monograph Section 4']
   },
   {
@@ -513,7 +513,7 @@ export const plantDatabase: PlantSpecies[] = [
     interestingFacts: ['Bast fibers resist rotting in moist sand.'],
     endemic: false,
     districts: ['jaisalmer', 'barmer', 'bikaner'],
-    imageUrl: 'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1000&q=80',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Leptadenia_pyrotechnica_whip_stems.jpg/800px-Leptadenia_pyrotechnica_whip_stems.jpg',
     references: ['Research Monograph Section 4']
   },
   {
@@ -547,7 +547,7 @@ export const plantDatabase: PlantSpecies[] = [
     interestingFacts: ['Ashwagandha means "horse smell", granting equine vitality.'],
     endemic: false,
     districts: ['jodhpur', 'barmer', 'pali', 'nagaur'],
-    imageUrl: 'https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=1000&q=80',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Withania_somnifera_red_berries.jpg/800px-Withania_somnifera_red_berries.jpg',
     references: ['Research Monograph Section 4']
   },
   {
@@ -581,7 +581,7 @@ export const plantDatabase: PlantSpecies[] = [
     interestingFacts: ['Spines carry green leaves right on their sharp shafts.'],
     endemic: false,
     districts: ['pali', 'jodhpur', 'jalor', 'nagaur'],
-    imageUrl: 'https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&w=1000&q=80',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Maytenus_emarginata_spines.jpg/800px-Maytenus_emarginata_spines.jpg',
     references: ['Research Monograph Section 4']
   },
   {
@@ -615,7 +615,7 @@ export const plantDatabase: PlantSpecies[] = [
     interestingFacts: ['Survives under extreme 100 mm annual rainfall.'],
     endemic: true,
     districts: ['jaisalmer', 'bikaner', 'barmer'],
-    imageUrl: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1000&q=80',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Lasiurus_scindicus_desert_grassland.jpg/800px-Lasiurus_scindicus_desert_grassland.jpg',
     references: ['Research Monograph Section 5: Graminoids']
   },
   {
@@ -649,7 +649,7 @@ export const plantDatabase: PlantSpecies[] = [
     interestingFacts: ['Drought-tolerant roots re-sprout immediately after first shower.'],
     endemic: false,
     districts: ['jodhpur', 'nagaur', 'barmer', 'bikaner', 'churu', 'pali'],
-    imageUrl: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1000&q=80',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Cenchrus_ciliaris_spikes.jpg/800px-Cenchrus_ciliaris_spikes.jpg',
     references: ['Research Monograph Section 5']
   },
   {
@@ -683,7 +683,7 @@ export const plantDatabase: PlantSpecies[] = [
     interestingFacts: ['Culms retain flammability even when damp.'],
     endemic: false,
     districts: ['jodhpur', 'pali', 'nagaur'],
-    imageUrl: 'https://images.unsplash.com/photo-1508873696983-2df515122519?auto=format&fit=crop&w=1000&q=80',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Saccharum_bengalense_plumes.jpg/800px-Saccharum_bengalense_plumes.jpg',
     references: ['Research Monograph Section 5']
   },
 
@@ -720,7 +720,7 @@ export const plantDatabase: PlantSpecies[] = [
     panchkutaComponent: 'Ker (Wild tangy cured berry)',
     endemic: false,
     districts: ['jaisalmer', 'barmer', 'jodhpur', 'bikaner', 'churu', 'pali'],
-    imageUrl: 'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1000&q=80',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Capparis_decidua_flowers_and_stems.jpg/800px-Capparis_decidua_flowers_and_stems.jpg',
     references: ['Research Monograph Section 4: Traditional Desert Foods']
   },
   {
@@ -755,7 +755,7 @@ export const plantDatabase: PlantSpecies[] = [
     panchkutaComponent: 'Sangri (Dried Khejri bean pod)',
     endemic: false,
     districts: ['jaisalmer', 'barmer', 'jodhpur', 'bikaner', 'nagaur', 'churu', 'pali', 'jalor'],
-    imageUrl: 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=1000&q=80',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Prosopis_cineraria_W_IMG_2814.jpg/800px-Prosopis_cineraria_W_IMG_2814.jpg',
     references: ['Research Monograph Section 4: Traditional Desert Foods']
   },
   {
@@ -790,7 +790,7 @@ export const plantDatabase: PlantSpecies[] = [
     panchkutaComponent: 'Kachri (Wild sour melon slice)',
     endemic: false,
     districts: ['jaisalmer', 'barmer', 'jodhpur', 'bikaner', 'nagaur', 'churu'],
-    imageUrl: 'https://images.unsplash.com/photo-1574316071802-0d684efa7bf5?auto=format&fit=crop&w=1000&q=80',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Citrullus_colocynthis_fruit.jpg/800px-Citrullus_colocynthis_fruit.jpg',
     references: ['Research Monograph Section 4: Traditional Desert Foods']
   },
   {
@@ -825,7 +825,7 @@ export const plantDatabase: PlantSpecies[] = [
     panchkutaComponent: 'Gunda (Mucilaginous gumberry)',
     endemic: false,
     districts: ['jodhpur', 'barmer', 'pali', 'nagaur'],
-    imageUrl: 'https://images.unsplash.com/photo-1528183429752-a97d0bf99b5a?auto=format&fit=crop&w=1000&q=80',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Ziziphus_mauritiana_fruit_and_leaves.jpg/800px-Ziziphus_mauritiana_fruit_and_leaves.jpg',
     references: ['Research Monograph Section 4: Traditional Desert Foods']
   },
   {
@@ -859,7 +859,7 @@ export const plantDatabase: PlantSpecies[] = [
     interestingFacts: ['Requires 3–4 days of boiling in saline water to neutralize intense toxins.'],
     endemic: false,
     districts: ['jaisalmer', 'barmer', 'bikaner'],
-    imageUrl: 'https://images.unsplash.com/photo-1574316071802-0d684efa7bf5?auto=format&fit=crop&w=1000&q=80',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Citrullus_colocynthis_fruit.jpg/800px-Citrullus_colocynthis_fruit.jpg',
     references: ['Research Monograph Section 4: Traditional Desert Foods']
   },
   {
@@ -893,7 +893,7 @@ export const plantDatabase: PlantSpecies[] = [
     interestingFacts: ['Ripens precisely when natural water bodies dry up in May.'],
     endemic: false,
     districts: ['bikaner', 'jaisalmer', 'barmer', 'jodhpur'],
-    imageUrl: 'https://images.unsplash.com/photo-1541675154750-0444c7d51e8e?auto=format&fit=crop&w=1000&q=80',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Salvadora_persica_002.jpg/800px-Salvadora_persica_002.jpg',
     references: ['Research Monograph Section 4: Traditional Desert Foods']
   },
   {
@@ -927,7 +927,7 @@ export const plantDatabase: PlantSpecies[] = [
     interestingFacts: ['Threshed with heavy wooden sticks to remove prickly burs.'],
     endemic: false,
     districts: ['jaisalmer', 'barmer', 'bikaner', 'churu'],
-    imageUrl: 'https://images.unsplash.com/photo-1533038590840-1cde6e668a91?auto=format&fit=crop&w=1000&q=80',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Cenchrus_biflorus_burs.jpg/800px-Cenchrus_biflorus_burs.jpg',
     references: ['Research Monograph Section 4: Traditional Desert Foods']
   },
   {
@@ -961,7 +961,7 @@ export const plantDatabase: PlantSpecies[] = [
     interestingFacts: ['Collected by morning dew before flowers shed.'],
     endemic: false,
     districts: ['jaisalmer', 'bikaner', 'barmer', 'churu'],
-    imageUrl: 'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1000&q=80',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Calligonum_polygonoides_habit.jpg/800px-Calligonum_polygonoides_habit.jpg',
     references: ['Research Monograph Section 4: Traditional Desert Foods']
   }
 ];
