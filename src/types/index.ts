@@ -55,6 +55,21 @@ export interface VisitorSubmission {
   adminNotes?: string;
 }
 
+export interface HabitatData {
+  id: string;
+  name: string;
+  localTerm: string;
+  overview: string;
+  nativeFlora: string[];
+  typicalFauna: string[];
+  climate: string;
+  ecologicalImportance: string;
+  threats: string[];
+  conservationPractices: string[];
+  imageUrl: string;
+  areaCoveragePercent?: number;
+}
+
 export interface DistrictData {
   id: string;
   name: string;
